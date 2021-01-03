@@ -1,6 +1,6 @@
-# matscode/paystack-php
+# Paystack PHP SDK
 
-#### TODO - RoadMap
+## RoadMap
 - `Use GuzzleHttp`
 - `Customers`
 - `Plans`
@@ -9,37 +9,34 @@
 - `Charges`
 - `others...`
 
-###### This package is for communicating with PAYSTACK RESTful API. [Paystack](https://paystack.com/)
-Having other resource point available on PAYSTACK API, Resources like; 
-- Transaction
-- Customers
-- Plans
-- Subscription
-- Transfers
-- Charges
-- and many more
+This package is for communicating with [Paystack API](https://paystack.com/)
 
-Just to name a few, it is only the Transaction Resource that is made available currently in this package. Development is ongoing while releases are Stable. Incase you find a BUG/Security Issue, Please, do be kind to open an issue or email [matscode at Gmail dot Com](mailto://matscode@gmail.com).
+Development is actively ongoing while releases are Stable.
 <br>
-**PS**: This library also works for you if you use paystack inline. You just have to use the `verify()` method, passing in your transaction `$reference|$token|$id` is compulsory.
+If you find a BUG/Security Issue, do be kind to open an issue or email [me:matscode](mailto:matscode@gmail.com).
+
 
 ## Requirements
-- Curl 
+List in the making
 
-## Install
-
-### Via Composer
-
+## Installation
 ``` bash
-$ composer require matscode/paystack
+composer require matscode/paystack
 ```
-If you use a Framework, check your documentation for how vendor packages are autoloaded else Add this to the top of your source file;
 
 ``` php
 require_once __DIR__ . "/vendor/autoload.php";
 ```
 
-## Making Transactions/Recieving Payment
+#### Manual
+- Download the archive
+- Extract into your project
+- And lastly
+    ``` php
+    require_once __DIR__ . "/vendor/autoload.php";
+    ```
+
+## Making Transactions/Receiving Payment
 
 ### Starting Up Paystack Transaction
 
@@ -135,13 +132,15 @@ You might wanna save Transaction `$authorizationCode` for the current customer s
 $response = $Transaction->authorizationCode($reference); // can also guess Transaction $reference
 ```
 
-## Hire Me
-I am available on contract if you need help integrating paystack into your Business Website or something.
-<br>
-Contact me via my email above - [michaelakanji.com](http://michaelakanji.com)
+## Contact
+Page: [https://inndex.page/matscode](https://inndex.page/matscode)
+Email: [Email Me](mailto:matscode@gmail.com)
 
 ## Contributions
-If you seem to understand the architecture, you are welcome to fork and pull else you can wait a bit more till when i provide convention documentation.
+Guide is coming soon. <br>
+If you seem to know the wires, you are welcome to dive in
 
 ## Licence
 GNU GPLV3
+
+Everything about this project is free... If you however made some improvement, you are welcome to shoot a PR.

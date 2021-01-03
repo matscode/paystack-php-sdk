@@ -1,8 +1,8 @@
 {
-    "name": "matscode/paystack",
+    "name": "matscode/paystack-php-sdk",
     "description": "This package is for communicating with PAYSTACK API",
     "type": "library",
-    "keywords": ["payment","paystack", "php"],
+    "keywords": ["payment","paystack", "php", "stripe", "processor"],
     "license": "GNU GPLv3",
     "minimum-stability": "stable",
     "autoload": {
@@ -12,7 +12,7 @@
         {
             "name": "Michael Akanji",
             "email": "matscode@gmail.com",
-            "homepage": "http://michaelakanji.com"
+            "homepage": "https://inndex.page/matscode"
         }
     ],
     "require": {}
