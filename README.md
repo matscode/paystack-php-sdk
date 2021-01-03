@@ -125,15 +125,15 @@ $Transaction->amountEquals($amountExpected);
 ```
 Now you can process Customer Valuable.
 <br>
-<br>
 You might wanna save Transaction `$authorizationCode` for the current customer subsequent Transaction but not a nessecity. It would only counts to future updates of this package or if you choose to extend the package.
 ``` php
 // returns Auth_xxxxxxx 
 $response = $Transaction->authorizationCode($reference); // can also guess Transaction $reference
 ```
 
-## Contact
-Page: [https://inndex.page/matscode](https://inndex.page/matscode)
+## Contact/Portfolio
+Visit: [https://inndex.page/matscode](https://inndex.page/matscode)
+<br>
 Email: [Email Me](mailto:matscode@gmail.com)
 
 ## Contributions
