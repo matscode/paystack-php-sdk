@@ -13,7 +13,6 @@
 
 	namespace Matscode\Paystack\Utility;
 
-
 	class Text
 	{
 		/**

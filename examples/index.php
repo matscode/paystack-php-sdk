@@ -10,13 +10,14 @@
 	 * @copyright (c)  2016 - 2017, TECRUM (http://www.tecrum.com)
 	 *
 	 */
+
 	require_once "../vendor/autoload.php";
 
 	use Matscode\Paystack\Transaction;
 	use Matscode\Paystack\Utility\Debug;
 	use Matscode\Paystack\Utility\Http;
 
-	$secretKey = 'sk_test_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx';
+	$secretKey = 'sk_test_f0d14cd8743d5075b8af59d78dac2022b108a671';
 
 	// creating the transaction object
 	$Transaction = new Transaction( $secretKey );
