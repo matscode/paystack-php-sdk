@@ -117,7 +117,7 @@ The two methods above try to guess your Transaction `$reference` but it is highl
 // This method does the check for you and return `(bool) true|false`
 $response = $Transaction->isSuccessful($reference);
 ```
-Moreso, you can also compare if amount paid by customer is the amount expected. This method only works after calling `verify()` or `isSuccessful()` in the same script. It is recommended to do this if you use paystack inline to initialize the transaction.
+More so, you can also compare if amount paid by a customer is the amount expected. This method only works after calling `verify()` or `isSuccessful()` in the same script. It is recommended to do this if you use paystack inline to initialize the transaction.
 ``` php
 $amountExpected = 5000; // amount must be in kobo
 // returns `(bool) true|false`
@@ -134,7 +134,7 @@ $response = $Transaction->authorizationCode($reference); // can also guess Trans
 ## Contact/Portfolio
 Visit: [https://inndex.page/matscode](https://inndex.page/matscode)
 <br>
-Email: [Email Me](mailto:matscode@gmail.com)
+Email: [matscode:gmail](mailto:matscode@gmail.com)
 
 ## Contributions
 Guide is coming soon. <br>
