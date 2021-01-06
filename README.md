@@ -21,7 +21,7 @@ List in the making
 
 ## Installation
 ``` bash
-composer require matscode/paystack
+composer require matscode/paystack-php-sdk
 ```
 
 ``` php
