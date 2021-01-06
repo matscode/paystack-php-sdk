@@ -2,6 +2,13 @@
   "name": "matscode/paystack-php-sdk",
   "description": "This package is for communicating with PAYSTACK API",
   "type": "library",
+  "authors": [
+    {
+      "name": "Michael Akanji",
+      "email": "matscode@gmail.com",
+      "homepage": "https://inndex.page/matscode"
+    }
+  ],
   "keywords": [
     "payment",
     "paystack",
@@ -11,24 +18,27 @@
     "processor"
   ],
   "license": "GNU GPLv3",
-  "minimum-stability": "stable",
+  "minimum-stability": "dev",
   "autoload": {
     "psr-4": {
-      "Matscode\\Paystack\\": "src/",
+      "Matscode\\Paystack\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
       "Matscode\\Paystack\\Tests\\": "tests/"
     }
   },
-  "authors": [
-    {
-      "name": "Michael Akanji",
-      "email": "matscode@gmail.com",
-      "homepage": "https://inndex.page/matscode"
-    }
-  ],
+  "config": {
+    "optimize-autoloader": true,
+    "preferred-install": "dist",
+    "sort-packages": true
+  },
   "require": {
     "guzzlehttp/guzzle": "^7.2"
   },
   "require-dev": {
-    "symfony/var-dumper": "9999999-dev"
+    "symfony/var-dumper": "9999999-dev",
+    "phpunit/phpunit": "^9"
   }
 }
