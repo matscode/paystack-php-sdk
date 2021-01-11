@@ -3,18 +3,10 @@
 
 namespace Matscode\Paystack;
 
-use Matscode\Paystack\Interfaces\PaymentProvider;
+use Matscode\Paystack\Providers\PaystackResourceProvider;
+use Matscode\Paystack\Utility\HTTP\HTTPClient;
 
-class Paystack implements PaymentProvider
+class Paystack extends PaystackResourceProvider
 {
-    public function __construct(string $secretKey)
-    {
-        echo $secretKey;
-    }
 
-    public function __get($propertyName)
-    {
-        // TODO: Implement __get() method and get the related resource
-        echo 'this is property was tried to be access: ' . $propertyName;
-    }
 }
