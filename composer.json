@@ -1,6 +1,6 @@
 {
   "name": "matscode/paystack-php-sdk",
-  "description": "This package is for communicating with PAYSTACK API",
+  "description": "Paystack PHP SDK is for communicating with PAYSTACK API",
   "type": "library",
   "authors": [
     {
