@@ -16,9 +16,14 @@ class HTTPClient extends Client
         parent::__construct([
             'base_uri' => $this->apiBaseUrl,
             'headers' => [
-                // 'Accept'     => 'application/json',
-                'Authentication'     => 'Bearer ' . $secretKey,
+                'Content-Type'     => 'application/json',
+                'Authorization'     => 'Bearer ' . $secretKey,
             ]
         ]);
+    }
+
+    public function requestFactory(array $messageComponent)
+    {
+        // TODO: Validate the need for this function before implementing...
     }
 }

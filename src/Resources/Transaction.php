@@ -12,17 +12,18 @@
 namespace Matscode\Paystack\Resources;
 
 
+use GuzzleHttp\Exception\ClientException;
 use Matscode\Paystack\Interfaces\ResourceInterface;
+use Matscode\Paystack\Traits\ResourcePath;
 use Matscode\Paystack\Utility\HTTP\HTTPClient;
 use Matscode\Paystack\Utility\Text;
 
 class Transaction implements ResourceInterface
 {
-    public
+    use ResourcePath;
+
+    private
         $data = [],
-        $amount = 0,
-        $email = null,
-        $reference = null,
         $resp =
         [
             'verify' => null,
@@ -30,14 +31,13 @@ class Transaction implements ResourceInterface
         ];
 
     private
-        $httpClient,
-        $basePath = '',
-        $path = '',
-        $_callbackUrl = null;
+        $httpClient;
 
     public function __construct(HTTPClient $HTTPClient, $callbackUrl = null)
     {
+        $this->setBasePath('/transaction');
         $this->httpClient = $HTTPClient;
+
     }
 
     /**
@@ -47,17 +47,23 @@ class Transaction implements ResourceInterface
      * @param bool $rawResponse
      *
      * @return mixed|\stdClass
+     * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function initialize(array $data = [], $rawResponse = false)
     {
-        $this->data += $data;
+        $this->setPath('/initialize');
 
-        $this->data['reference'] = $this->data['reference'] ?? Text::uniqueRef();
+        $this->data = array_merge($this->data, $data);
 
-        $this->resp['initialize'] =
-            $this->httpClient
-                ->post('/initialize', $data);
+        $this->data['reference'] = 'REF-' . ($this->data['reference'] ?? Text::uniqueRef());
 
+        try {
+            $this->resp['initialize'] =
+                $this->httpClient
+                    ->post($this->getPath(), ['json' => $this->data])->getBody();
+        } catch (ClientException $e) {
+            dd($e);
+        }
 
         if ($rawResponse) {
             $response =
@@ -81,7 +87,7 @@ class Transaction implements ResourceInterface
     }
 
     /**
-     * Is used to Check if a transaction is successful and return the transaction object datd
+     * Is used to Check if a transaction is successful and return the transaction object data
      *
      * @param null $reference
      *
@@ -117,8 +123,9 @@ class Transaction implements ResourceInterface
      * @param null $reference
      *
      * @return bool
+     * @throws \Exception
      */
-    public function isSuccessful($reference = null)
+    public function isSuccessful($reference = null): bool
     {
         // get verify response
         $response = $this->verify($reference);
@@ -144,7 +151,7 @@ class Transaction implements ResourceInterface
      *
      * @return bool
      */
-    public function amountEquals($amountExpected)
+    public function amountEquals($amountExpected): bool
     {
         // $this->verify(); // call verify() or isSuccessful() before calling this method
         $transactionResponse = $this->resp['verify'];
@@ -160,6 +167,7 @@ class Transaction implements ResourceInterface
      * @param null $reference
      *
      * @return string|null
+     * @throws \Exception
      */
     public function getAuthorizationCode($reference = null)
     {
@@ -178,18 +186,17 @@ class Transaction implements ResourceInterface
      *
      * @return $this
      */
-    public function setEmail($email)
+    public function setEmail(string $email): Transaction
     {
         // setting the email
-        $this->email = $email;
+        $this->data['email'] = $email;
 
         return $this;
     }
 
-    public function getEmail($email)
+    public function getEmail(): string
     {
-        // setting the email
-        $this->email = $email;
+        return $this->data['email'];
     }
 
     /**
@@ -198,10 +205,9 @@ class Transaction implements ResourceInterface
      * @return $this
      * @todo Allow to set kobo using '.' syntax
      */
-    public function setAmount($amount)
+    public function setAmount(int $amount): Transaction
     {
-        // setting amount in naira //TODO: Allow to set kobo using '.' syntax
-        $this->amount = ($amount * 100);
+        $this->data['amount'] = $amount;
 
         return $this;
     }
@@ -209,19 +215,22 @@ class Transaction implements ResourceInterface
     /**
      * @return int
      */
-    public function getAmount()
+    public function getAmount(): ?int
     {
-        return $this->amount;
+        return $this->data['amount'] ?? null;
     }
 
     /**
      * Sets the transaction reference code/id
      *
-     * @param null $reference
+     * @param string $reference
+     * @return Transaction
      */
-    public function setReference($reference)
+    public function setReference(string $reference)
     {
-        $this->reference = $reference;
+        $this->data['reference'] = $reference;
+
+        return $this;
     }
 
     /**
@@ -235,7 +244,7 @@ class Transaction implements ResourceInterface
         if ($afterInitialize) {
             $reference = $this->response->data->reference;
         } else {
-            $reference = $this->reference;
+            $reference = $this->data['reference'];
         }
 
         return $reference;
@@ -248,9 +257,9 @@ class Transaction implements ResourceInterface
      *
      * @return $this
      */
-    public function setCallbackUrl($callbackUrl)
+    public function setCallbackUrl(string $callbackUrl): Transaction
     {
-        $this->_callbackUrl = $callbackUrl;
+        $this->data['callback_url'] = $callbackUrl;
 
         return $this;
     }
