@@ -7,13 +7,15 @@
 >
     <title>Paystack PHP SDK</title>
     <paths>
-        <output>docs/.build</output>
+        <output>docs/</output>
     </paths>
 
-    <template name="clean" />
-    <template name="xml" />
+    <template name="clean"/>
+    <template name="xml"/>
 
-    <ignore hidden="true" symlinks="true">
-        <path>tests/**/*</path>
-    </ignore>
+    <version number="latest">
+        <ignore hidden="true" symlinks="true">
+            <path>tests/**/*</path>
+        </ignore>
+    </version>
 </phpdocumentor>
