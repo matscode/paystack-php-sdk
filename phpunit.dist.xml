@@ -9,6 +9,7 @@
             <directory>tests</directory>
         </testsuite>
     </testsuites>
+
     <logging>
         <testdoxXml outputFile="testdox.xml"/>
     </logging>

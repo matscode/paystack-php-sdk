@@ -5,7 +5,7 @@ use PHPUnit\Framework\TestCase;
 
 class PaystackTest extends TestCase
 {
-    public function testMagicResourceIsResolved()
+    public function testResourceCanBeMagicallyResolved()
     {
         $paystack = new Paystack('sk_');
 

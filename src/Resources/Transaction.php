@@ -11,8 +11,6 @@
 
 namespace Matscode\Paystack\Resources;
 
-
-use GuzzleHttp\Exception\ClientException;
 use Matscode\Paystack\Interfaces\ResourceInterface;
 use Matscode\Paystack\Traits\ResourcePath;
 use Matscode\Paystack\Utility\HTTP\HTTPClient;
@@ -37,7 +35,6 @@ class Transaction implements ResourceInterface
     {
         $this->setBasePath('/transaction');
         $this->httpClient = $HTTPClient;
-
     }
 
     /**
@@ -55,15 +52,11 @@ class Transaction implements ResourceInterface
 
         $this->data = array_merge($this->data, $data);
 
-        $this->data['reference'] = 'REF-' . ($this->data[ 'reference'] ?? Text::uniqueRef());
+        $this->data['reference'] = 'REF-' . ($this->data['reference'] ?? Text::uniqueRef());
 
-        try {
-            $this->resp['initialize'] =
-                $this->httpClient
-                    ->post($this->getPath(), ['json' => $this->data])->getBody();
-        } catch (ClientException $e) {
-            dd($e);
-        }
+        $this->resp['initialize'] =
+            $this->httpClient
+                ->post($this->getPath(), ['json' => $this->data])->getBody();
 
         if ($rawResponse) {
             $response =
