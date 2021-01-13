@@ -55,7 +55,7 @@ class Transaction implements ResourceInterface
 
         $this->data = array_merge($this->data, $data);
 
-        $this->data['reference'] = 'REF-' . ($this->data['reference'] ?? Text::uniqueRef());
+        $this->data['reference'] = 'REF-' . ($this->data[ 'reference'] ?? Text::uniqueRef());
 
         try {
             $this->resp['initialize'] =

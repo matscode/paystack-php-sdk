@@ -5,10 +5,10 @@ use PHPUnit\Framework\TestCase;
 
 class PaystackTest extends TestCase
 {
-    public function test_can_output_my_name()
+    public function testMagicResourceIsResolved()
     {
         $paystack = new Paystack('sk_');
 
-        $this->assertEquals('Paystack', 'Paystack');
+        $this->assertInstanceOf(\Matscode\Paystack\Resources\Transaction::class, $paystack->transaction);
     }
 }

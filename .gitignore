@@ -7,3 +7,4 @@ composer.phar
 
 /.idea
 .phpunit.result.cache
+testdox.xml
