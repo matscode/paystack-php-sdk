@@ -1,4 +1,7 @@
 <?php
+/**
+ * @ignore
+ */
 namespace Matscode\Paystack;
 
 class ResourceRegistry {

@@ -2,10 +2,8 @@
 /**
  * Class for Transaction Resource
  *
- * @package        Paystack SDK
- * @category       Source
+ * @package        Paystack\Resources\Transaction
  * @author         Michael Akanji <matscode@gmail.com>
- * @date           2020-1-11
  *
  */
 
@@ -44,7 +42,8 @@ class Transaction implements ResourceInterface
      * @param bool $rawResponse
      *
      * @return mixed|\stdClass
-     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws \GuzzleHttp\Exception\ClientException
+     *
      */
     public function initialize(array $data = [], $rawResponse = false)
     {
@@ -86,7 +85,6 @@ class Transaction implements ResourceInterface
      *
      * @return mixed
      * @throws \Exception
-     * @todo Use session to keep reference temporary per transaction To enhance Transaction reference guessing.
      *
      */
     public function verify($reference = null)
@@ -193,10 +191,11 @@ class Transaction implements ResourceInterface
     }
 
     /**
+     * Set transaction amount in kobo(NGN) or pesewas(GHS)
+     *
      * @param int $amount
      *
      * @return $this
-     * @todo Allow to set kobo using '.' syntax
      */
     public function setAmount(int $amount): Transaction
     {

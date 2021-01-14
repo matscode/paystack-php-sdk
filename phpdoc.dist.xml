@@ -10,12 +10,19 @@
         <output>docs/</output>
     </paths>
 
-    <template name="clean"/>
+    <template name="default"/>
     <template name="xml"/>
 
     <version number="latest">
-        <ignore hidden="true" symlinks="true">
-            <path>tests/**/*</path>
-        </ignore>
+        <folder>latest</folder>
+        <api>
+            <source dsn=".">
+                <path>src</path>
+            </source>
+            <ignore hidden="true" symlinks="true">
+                <path>tests/**/*</path>
+                <path>src/ResourceRegistry.php</path>
+            </ignore>
+        </api>
     </version>
 </phpdocumentor>

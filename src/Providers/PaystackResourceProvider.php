@@ -21,6 +21,12 @@ abstract class PaystackResourceProvider
         $this->callbackUrl = $callbackUrl;
     }
 
+    /**
+     * @param $resourceName
+     * @return mixed
+     * @throws InvalidResourceException
+     * @ignore
+     */
     public function __get($resourceName)
     {
         if (array_key_exists($resourceName, ResourceRegistry::$registry)) {

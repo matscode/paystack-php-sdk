@@ -3,11 +3,8 @@
 	 *
 	 * Description
 	 *
-	 * @package        Paystack
-	 * @category       Source
+     * @package        Paystack\Utility
 	 * @author         Michael Akanji <matscode@gmail.com>
-	 * @date           2017-06-26
-	 * @copyright (c)  2016 - 2017, TECRUM (http://www.tecrum.com)
 	 *
 	 */
 
@@ -47,8 +44,12 @@
 		}
 
 
-		public static function removeSlashes( $string )
-		{
+        /**
+         * @param string $string
+         * @return string
+         */
+        public static function removeSlashes(string $string ): string
+        {
 			return trim( $string, '/' );
 		}
 	}
