@@ -24,7 +24,7 @@
 		 * @return bool|string
 		 * @throws \Exception
 		 */
-		public static function uniqueRef( $length = 15, $capsMix = 5 )
+		public static function uniqueStr($length = 15, $capsMix = 5 )
 		{
 			// uniqid gives 15 chars, but you could adjust it to your needs.
 			if ( function_exists( "random_bytes" ) ) {

@@ -8,5 +8,5 @@ use Matscode\Paystack\Utility\HTTP\HTTPClient;
 
 interface ResourceInterface
 {
-    public function __construct(HTTPClient $HTTPClient, $callbackUrl = null);
+    public function __construct(HTTPClient $HTTPClient);
 }

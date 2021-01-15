@@ -9,8 +9,10 @@
 
 namespace Matscode\Paystack\Resources;
 
+use Matscode\Paystack\Exceptions\InvalidArgumentException;
 use Matscode\Paystack\Interfaces\ResourceInterface;
 use Matscode\Paystack\Traits\ResourcePath;
+use Matscode\Paystack\Utility\Helpers;
 use Matscode\Paystack\Utility\HTTP\HTTPClient;
 use Matscode\Paystack\Utility\Text;
 
@@ -18,116 +20,79 @@ class Transaction implements ResourceInterface
 {
     use ResourcePath;
 
-    private
-        $data = [],
-        $resp =
-        [
-            'verify' => null,
-            'initialize' => null
-        ];
+    protected $httpClient, $callbackUrl, $data;
 
-    private
-        $httpClient;
-
-    public function __construct(HTTPClient $HTTPClient, $callbackUrl = null)
+    public function __construct(HTTPClient $HTTPClient)
     {
-        $this->setBasePath('/transaction');
+        $this->setBasePath('transaction');
+        $this->setReference('REF-' . ($this->data['reference'] ?? Text::uniqueStr()));
+
         $this->httpClient = $HTTPClient;
     }
 
     /**
      * This method must be called to request for payment. which return an initial transaction obj
      *
+     * @link https://paystack.com/docs/api/#transaction-initialize
+     *
      * @param array $data
-     * @param bool $rawResponse
-     *
      * @return mixed|\stdClass
-     * @throws \GuzzleHttp\Exception\ClientException
-     *
+     * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function initialize(array $data = [], $rawResponse = false)
+    public function initialize(array $data = []): \stdClass
     {
-        $this->setPath('/initialize');
+        $data = array_merge($this->data, $data);
 
-        $this->data = array_merge($this->data, $data);
-
-        $this->data['reference'] = 'REF-' . ($this->data['reference'] ?? Text::uniqueRef());
-
-        $this->resp['initialize'] =
-            $this->httpClient
-                ->post($this->getPath(), ['json' => $this->data])->getBody();
-
-        if ($rawResponse) {
-            $response =
-                $this->resp['initialize'];
-        } else {
-            // Initialize a new Obj to save Striped response
-            $response = new \stdClass();
-            if (isset($this->resp['initialize']->data) &&
-                is_object($this->resp['initialize']->data)
-            ) {
-                $response->authorizationUrl = $this->resp['initialize']->data->authorization_url;
-                $response->reference = $this->resp['initialize']->data->reference;
-            } else {
-                // return the raw response
-                $response =
-                    $this->resp['initialize'];
-            }
+        // check required properties
+        if (!($data['email'] ?? null)
+            || !(($data['amount'] ?? null)
+                || ($data['plan'] ?? null))) {
+            throw new InvalidArgumentException('(email) and (amount | plan) are required!');
         }
 
-        return $response;
+        $data['callback_url'] = $data['callback_url'] ?? $this->callbackUrl;
+
+        $this->data = []; // empty the bag
+
+        return Helpers::responseToObj($this->httpClient->post($this->makePath('initialize'), [
+            'json' => $data
+        ]));
     }
 
     /**
      * Is used to Check if a transaction is successful and return the transaction object data
      *
-     * @param null $reference
+     * @link https://paystack.com/docs/api/#transaction-verify
      *
-     * @return mixed
-     * @throws \Exception
+     * @param string $referenceCode
      *
+     * @return \StdClass
+     * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function verify($reference = null)
+    public function verify(string $referenceCode): \StdClass
     {
-        // try to guess reference if not set
-        if (is_null($reference)) {
-            // guess reference
-            if (isset($_GET['reference'])) {
-                $reference = $_GET['reference'];
-            } else {
-                // return false
-                return false;
-            }
-        }
-
-        $this->resp['verify'] =
-            $this
-                ->setAction('verify', [$reference])
-                ->sendRequest([], 'GET');
-
-        return $this->resp['verify'];
+        return Helpers::responseToObj($this->httpClient->get($this->makePath('verify/' . $referenceCode)));
     }
 
     /**
      * Like verify(), but it only checks to see if a transactions is successful returning boolean
      *
-     * @param null $reference
+     * @param string $reference
      *
      * @return bool
-     * @throws \Exception
+     * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function isSuccessful($reference = null): bool
+    public function isSuccessful(string $reference): bool
     {
-        // get verify response
         $response = $this->verify($reference);
 
-        // Initialize as !isSuccessful
         $isSuccessful = false;
 
         // check if transaction is successful
-        if (isset($response->data) && is_object($response->data) &&
-            $response->status == true &&
-            $response->data->status == 'success'
+        if (isset($response->data)
+            && is_object($response->data)
+            && $response->status == true
+            && $response->data->status == 'success'
         ) {
             $isSuccessful = true;
         }
@@ -136,40 +101,33 @@ class Transaction implements ResourceInterface
     }
 
     /**
-     * Compares the amount paid by customer to the amount passed into it
+     * Add metadata to the request data
      *
-     * @param $amountExpected
+     * Method can be called chained more than once. Last call with repeated property overwrites the former
      *
-     * @return bool
+     * @param array $metadata
+     * @return $this
      */
-    public function amountEquals($amountExpected): bool
+    public function addMetadata(array $metadata = []): Transaction
     {
-        // $this->verify(); // call verify() or isSuccessful() before calling this method
-        $transactionResponse = $this->resp['verify'];
-        if (is_object($transactionResponse)) {
-            return
-                ((int)$transactionResponse->data->amount === $amountExpected);
-        }
+        $this->data['metadata'] = array_merge($this->data['metadata'] ?? [], $metadata);
 
-        return false;
+        return $this;
     }
 
     /**
-     * @param null $reference
+     * Ignore setting amount when setting plan and vice versa. Plan takes precedence
      *
-     * @return string|null
-     * @throws \Exception
+     * @param string $plan
+     * @return $this
      */
-    public function getAuthorizationCode($reference = null)
+    public function setPlan(string $plan): Transaction
     {
-        $authorizationCode = null;
-        // get verify response
-        if ($this->isSuccessful($reference)) {
-            $response = $this->verify($reference);
-            $authorizationCode = $response->data->authorization->authorization_code;
-        }
+        // set amount to 0 to Invalid amount error when setting a plan
+        $this->data['amount'] = 0;
+        $this->data['plan'] = $plan;
 
-        return $authorizationCode;
+        return $this;
     }
 
     /**
@@ -192,6 +150,8 @@ class Transaction implements ResourceInterface
 
     /**
      * Set transaction amount in kobo(NGN) or pesewas(GHS)
+     *
+     * NOTE: Setting plan overwrites your defined amount
      *
      * @param int $amount
      *
@@ -218,7 +178,7 @@ class Transaction implements ResourceInterface
      * @param string $reference
      * @return Transaction
      */
-    public function setReference(string $reference)
+    public function setReference(string $reference): Transaction
     {
         $this->data['reference'] = $reference;
 
@@ -226,6 +186,8 @@ class Transaction implements ResourceInterface
     }
 
     /**
+     * Returns the transaction code/id used
+     *
      * @param bool $afterInitialize
      *
      * @return null
@@ -233,13 +195,7 @@ class Transaction implements ResourceInterface
      */
     public function getReference($afterInitialize = false)
     {
-        if ($afterInitialize) {
-            $reference = $this->response->data->reference;
-        } else {
-            $reference = $this->data['reference'];
-        }
-
-        return $reference;
+        return $this->data['reference'];
     }
 
     /**
@@ -251,9 +207,28 @@ class Transaction implements ResourceInterface
      */
     public function setCallbackUrl(string $callbackUrl): Transaction
     {
-        $this->data['callback_url'] = $callbackUrl;
+        $this->callbackUrl = $callbackUrl;
 
         return $this;
+    }
+
+    /**
+     * Get the list of all transactions
+     *
+     * @link https://paystack.com/docs/api/#transaction-list
+     *
+     * @param int $numberOfRecords number of record per page
+     * @param int $page page number
+     * @param array $otherOptions
+     * @return \StdClass
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
+    public function list($numberOfRecords = 50, $page = 1, $otherOptions = []): \StdClass
+    {
+        return Helpers::responseToObj($this->httpClient->get($this->makePath() . '?' . http_build_query($otherOptions + [
+                    'perPage' => $numberOfRecords,
+                    'page' => $page
+                ])));
     }
 
 }

@@ -35,11 +35,13 @@
     "sort-packages": true
   },
   "require": {
-    "guzzlehttp/guzzle": "^7.2"
+    "guzzlehttp/guzzle": "^7.2",
+    "ext-json": "*"
   },
   "require-dev": {
     "mockery/mockery": "1.4.x-dev",
     "phpunit/phpunit": "^9",
-    "symfony/var-dumper": "9999999-dev"
+    "symfony/var-dumper": "9999999-dev",
+    "squizlabs/php_codesniffer": "3.*"
   }
 }

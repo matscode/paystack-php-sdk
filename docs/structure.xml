@@ -40,7 +40,7 @@
             
             <parse_markers></parse_markers>
         </file>
-            <file path="src/Interfaces/ResourceInterface.php" hash="5f0586e12ad7df08ecd37c9a72564304">
+            <file path="src/Interfaces/ResourceInterface.php" hash="694f3855e12b492cbee2fbb9dc168cc3">
             <docblock line="0">
     <description></description>
     <long-description></long-description>
@@ -79,12 +79,6 @@
     <type>\Matscode\Paystack\Utility\HTTP\HTTPClient</type>
 </argument>
 
-            <argument line="11" by_reference="false">
-    <name>callbackUrl</name>
-    <default>null</default>
-    <type>mixed</type>
-</argument>
-
         <docblock line="11">
     <description></description>
     <long-description></long-description>
@@ -121,7 +115,7 @@
                     <name>Paystack</name>
                     <full_name>\Matscode\Paystack\Paystack</full_name>
                     <docblock line="8">
-    <description></description>
+    <description>Class PaystackResourceProvider</description>
     <long-description></long-description>
                     <tag
                 name="package"
@@ -133,34 +127,17 @@
                     
                                         
                                         
-                                                                <method final="false" abstract="false" static="false" namespace="\Matscode\Paystack\Providers" line="15" visibility="public">
+                                                                <method final="false" abstract="false" static="false" namespace="\Matscode\Paystack\Providers" line="21" visibility="public">
     <name>__construct</name>
     <full_name>\Matscode\Paystack\Providers\PaystackResourceProvider::__construct()</full_name>
     <value></value>
-    <inherited_from>\Matscode\Paystack\Providers\PaystackResourceProvider</inherited_from>            <argument line="15" by_reference="false">
+    <inherited_from>\Matscode\Paystack\Providers\PaystackResourceProvider</inherited_from>            <argument line="21" by_reference="false">
     <name>secretKey</name>
     <default></default>
     <type>string</type>
 </argument>
 
-        <docblock line="15">
-    <description></description>
-    <long-description></long-description>
-                            </docblock>
-
-</method>
-
-                                            <method final="false" abstract="false" static="false" namespace="\Matscode\Paystack\Providers" line="20" visibility="public">
-    <name>setCallbackUrl</name>
-    <full_name>\Matscode\Paystack\Providers\PaystackResourceProvider::setCallbackUrl()</full_name>
-    <value></value>
-    <inherited_from>\Matscode\Paystack\Providers\PaystackResourceProvider</inherited_from>            <argument line="20" by_reference="false">
-    <name>callbackUrl</name>
-    <default></default>
-    <type>string</type>
-</argument>
-
-        <docblock line="20">
+        <docblock line="21">
     <description></description>
     <long-description></long-description>
                             </docblock>
@@ -173,7 +150,7 @@
             
             <parse_markers></parse_markers>
         </file>
-            <file path="src/Providers/PaystackResourceProvider.php" hash="39e4445b9600858120efc867d79b0850">
+            <file path="src/Providers/PaystackResourceProvider.php" hash="20bdcbbb07e2ad7599443da7c684ad65">
             <docblock line="0">
     <description></description>
     <long-description></long-description>
@@ -191,22 +168,26 @@
             
                         
                         
-                                        <class final="false" abstract="true" namespace="\Matscode\Paystack\Providers" line="11">
+                                        <class final="false" abstract="true" namespace="\Matscode\Paystack\Providers" line="17">
                     <name>PaystackResourceProvider</name>
                     <full_name>\Matscode\Paystack\Providers\PaystackResourceProvider</full_name>
-                    <docblock line="11">
-    <description></description>
+                    <docblock line="17">
+    <description>Class PaystackResourceProvider</description>
     <long-description></long-description>
                     <tag
                 name="package"
-                description=""
+                description="Matscode\Paystack\Providers"
                                                                                                 />
-                                                            </docblock>
+                            <tag
+                name="property"
+                description=""
+                                                                 variable="transaction"                                 type="\Matscode\Paystack\Resources\Transaction"/>
+                                                </docblock>
 
                     
                     
                                         
-                                            <property namespace="\Matscode\Paystack\Providers\PaystackResourceProvider" line="13" visibility="protected">
+                                            <property namespace="\Matscode\Paystack\Providers\PaystackResourceProvider" line="19" visibility="protected">
     <name>HTTPClient</name>
     <full_name>\Matscode\Paystack\Providers\PaystackResourceProvider::$HTTPClient</full_name>
     <default></default>
@@ -217,7 +198,7 @@
 
 </property>
 
-                                            <property namespace="\Matscode\Paystack\Providers\PaystackResourceProvider" line="13" visibility="protected">
+                                            <property namespace="\Matscode\Paystack\Providers\PaystackResourceProvider" line="19" visibility="protected">
     <name>callbackUrl</name>
     <full_name>\Matscode\Paystack\Providers\PaystackResourceProvider::$callbackUrl</full_name>
     <default></default>
@@ -229,34 +210,17 @@
 </property>
 
                                         
-                                            <method final="false" abstract="false" static="false" namespace="\Matscode\Paystack\Providers" line="15" visibility="public">
+                                            <method final="false" abstract="false" static="false" namespace="\Matscode\Paystack\Providers" line="21" visibility="public">
     <name>__construct</name>
     <full_name>\Matscode\Paystack\Providers\PaystackResourceProvider::__construct()</full_name>
     <value></value>
-                <argument line="15" by_reference="false">
+                <argument line="21" by_reference="false">
     <name>secretKey</name>
     <default></default>
     <type>string</type>
 </argument>
 
-        <docblock line="15">
-    <description></description>
-    <long-description></long-description>
-                            </docblock>
-
-</method>
-
-                                            <method final="false" abstract="false" static="false" namespace="\Matscode\Paystack\Providers" line="20" visibility="public">
-    <name>setCallbackUrl</name>
-    <full_name>\Matscode\Paystack\Providers\PaystackResourceProvider::setCallbackUrl()</full_name>
-    <value></value>
-                <argument line="20" by_reference="false">
-    <name>callbackUrl</name>
-    <default></default>
-    <type>string</type>
-</argument>
-
-        <docblock line="20">
+        <docblock line="21">
     <description></description>
     <long-description></long-description>
                             </docblock>
@@ -269,7 +233,7 @@
             
             <parse_markers></parse_markers>
         </file>
-            <file path="src/Resources/Transaction.php" hash="aa5f7a18b16190b36f6779ac6294cf92">
+            <file path="src/Resources/Transaction.php" hash="ff0d87967ed86b67ae7296f284391c59">
             <docblock line="0">
     <description>Class for Transaction Resource</description>
     <long-description></long-description>
@@ -291,10 +255,10 @@
             
                         
                         
-                                        <class final="false" abstract="false" namespace="\Matscode\Paystack\Resources" line="17">
+                                        <class final="false" abstract="false" namespace="\Matscode\Paystack\Resources" line="19">
                     <name>Transaction</name>
                     <full_name>\Matscode\Paystack\Resources\Transaction</full_name>
-                    <docblock line="17">
+                    <docblock line="19">
     <description></description>
     <long-description></long-description>
                     <tag
@@ -307,29 +271,7 @@
                                             <implements>\Matscode\Paystack\Interfaces\ResourceInterface</implements>
                     
                                         
-                                            <property namespace="\Matscode\Paystack\Resources\Transaction" line="21" visibility="private">
-    <name>data</name>
-    <full_name>\Matscode\Paystack\Resources\Transaction::$data</full_name>
-    <default></default>
-        <docblock line="">
-    <description></description>
-    <long-description></long-description>
-    </docblock>
-
-</property>
-
-                                            <property namespace="\Matscode\Paystack\Resources\Transaction" line="21" visibility="private">
-    <name>resp</name>
-    <full_name>\Matscode\Paystack\Resources\Transaction::$resp</full_name>
-    <default></default>
-        <docblock line="">
-    <description></description>
-    <long-description></long-description>
-    </docblock>
-
-</property>
-
-                                            <property namespace="\Matscode\Paystack\Resources\Transaction" line="29" visibility="private">
+                                            <property namespace="\Matscode\Paystack\Resources\Transaction" line="23" visibility="protected">
     <name>httpClient</name>
     <full_name>\Matscode\Paystack\Resources\Transaction::$httpClient</full_name>
     <default></default>
@@ -340,57 +282,63 @@
 
 </property>
 
+                                            <property namespace="\Matscode\Paystack\Resources\Transaction" line="23" visibility="protected">
+    <name>callbackUrl</name>
+    <full_name>\Matscode\Paystack\Resources\Transaction::$callbackUrl</full_name>
+    <default></default>
+        <docblock line="">
+    <description></description>
+    <long-description></long-description>
+    </docblock>
+
+</property>
+
+                                            <property namespace="\Matscode\Paystack\Resources\Transaction" line="23" visibility="protected">
+    <name>data</name>
+    <full_name>\Matscode\Paystack\Resources\Transaction::$data</full_name>
+    <default></default>
+        <docblock line="">
+    <description></description>
+    <long-description></long-description>
+    </docblock>
+
+</property>
+
                                         
-                                            <method final="false" abstract="false" static="false" namespace="\Matscode\Paystack\Resources" line="32" visibility="public">
+                                            <method final="false" abstract="false" static="false" namespace="\Matscode\Paystack\Resources" line="25" visibility="public">
     <name>__construct</name>
     <full_name>\Matscode\Paystack\Resources\Transaction::__construct()</full_name>
     <value></value>
-                <argument line="32" by_reference="false">
+                <argument line="25" by_reference="false">
     <name>HTTPClient</name>
     <default></default>
     <type>\Matscode\Paystack\Utility\HTTP\HTTPClient</type>
 </argument>
 
-            <argument line="32" by_reference="false">
-    <name>callbackUrl</name>
-    <default>null</default>
-    <type>mixed</type>
-</argument>
-
-        <docblock line="32">
+        <docblock line="25">
     <description></description>
     <long-description></long-description>
                             </docblock>
 
 </method>
 
-                                            <method final="false" abstract="false" static="false" namespace="\Matscode\Paystack\Resources" line="48" visibility="public">
+                                            <method final="false" abstract="false" static="false" namespace="\Matscode\Paystack\Resources" line="40" visibility="public">
     <name>initialize</name>
     <full_name>\Matscode\Paystack\Resources\Transaction::initialize()</full_name>
     <value></value>
-                <argument line="48" by_reference="false">
+                <argument line="40" by_reference="false">
     <name>data</name>
     <default>[]</default>
     <type>array</type>
 </argument>
 
-            <argument line="48" by_reference="false">
-    <name>rawResponse</name>
-    <default>false</default>
-    <type>bool</type>
-</argument>
-
-        <docblock line="48">
+        <docblock line="40">
     <description>This method must be called to request for payment. which return an initial transaction obj</description>
     <long-description></long-description>
                     <tag
                 name="param"
                 description=""
                                                                  variable="data"                                 type="array"/>
-                <tag
-                name="param"
-                description=""
-                                                                 variable="rawResponse"                                 type="bool"/>
                             <tag
                 name="return"
                 description=""
@@ -398,57 +346,57 @@
                             <tag
                 name="throws"
                 description=""
-                                                                                                 type="\GuzzleHttp\Exception\ClientException"/>
+                                                                                                 type="\GuzzleHttp\Exception\GuzzleException"/>
             </docblock>
 
 </method>
 
-                                            <method final="false" abstract="false" static="false" namespace="\Matscode\Paystack\Resources" line="90" visibility="public">
+                                            <method final="false" abstract="false" static="false" namespace="\Matscode\Paystack\Resources" line="68" visibility="public">
     <name>verify</name>
     <full_name>\Matscode\Paystack\Resources\Transaction::verify()</full_name>
     <value></value>
-                <argument line="90" by_reference="false">
-    <name>reference</name>
-    <default>null</default>
-    <type>null</type>
+                <argument line="68" by_reference="false">
+    <name>referenceCode</name>
+    <default></default>
+    <type>string</type>
 </argument>
 
-        <docblock line="90">
+        <docblock line="68">
     <description>Is used to Check if a transaction is successful and return the transaction object data</description>
     <long-description></long-description>
                     <tag
                 name="param"
                 description=""
-                                                                 variable="reference"                                 type="null"/>
+                                                                 variable="referenceCode"                                 type="string"/>
                             <tag
                 name="return"
                 description=""
-                                                                                                 type="mixed"/>
+                                                                                                 type="\StdClass"/>
                             <tag
                 name="throws"
                 description=""
-                                                                                                 type="\Exception"/>
+                                                                                                 type="\GuzzleHttp\Exception\GuzzleException"/>
             </docblock>
 
 </method>
 
-                                            <method final="false" abstract="false" static="false" namespace="\Matscode\Paystack\Resources" line="119" visibility="public">
+                                            <method final="false" abstract="false" static="false" namespace="\Matscode\Paystack\Resources" line="81" visibility="public">
     <name>isSuccessful</name>
     <full_name>\Matscode\Paystack\Resources\Transaction::isSuccessful()</full_name>
     <value></value>
-                <argument line="119" by_reference="false">
+                <argument line="81" by_reference="false">
     <name>reference</name>
-    <default>null</default>
-    <type>null</type>
+    <default></default>
+    <type>string</type>
 </argument>
 
-        <docblock line="119">
+        <docblock line="81">
     <description>Like verify(), but it only checks to see if a transactions is successful returning boolean</description>
     <long-description></long-description>
                     <tag
                 name="param"
                 description=""
-                                                                 variable="reference"                                 type="null"/>
+                                                                 variable="reference"                                 type="string"/>
                             <tag
                 name="return"
                 description=""
@@ -456,76 +404,72 @@
                             <tag
                 name="throws"
                 description=""
-                                                                                                 type="\Exception"/>
+                                                                                                 type="\GuzzleHttp\Exception\GuzzleException"/>
             </docblock>
 
 </method>
 
-                                            <method final="false" abstract="false" static="false" namespace="\Matscode\Paystack\Resources" line="145" visibility="public">
-    <name>amountEquals</name>
-    <full_name>\Matscode\Paystack\Resources\Transaction::amountEquals()</full_name>
+                                            <method final="false" abstract="false" static="false" namespace="\Matscode\Paystack\Resources" line="107" visibility="public">
+    <name>addMetadata</name>
+    <full_name>\Matscode\Paystack\Resources\Transaction::addMetadata()</full_name>
     <value></value>
-                <argument line="145" by_reference="false">
-    <name>amountExpected</name>
+                <argument line="107" by_reference="false">
+    <name>metadata</name>
+    <default>[]</default>
+    <type>array</type>
+</argument>
+
+        <docblock line="107">
+    <description>Add metadata to the request data</description>
+    <long-description>Method can be called chained more than once. Last call with repeated property overwrites the former</long-description>
+                    <tag
+                name="param"
+                description=""
+                                                                 variable="metadata"                                 type="array"/>
+                            <tag
+                name="return"
+                description=""
+                                                                                                 type="$this"/>
+            </docblock>
+
+</method>
+
+                                            <method final="false" abstract="false" static="false" namespace="\Matscode\Paystack\Resources" line="120" visibility="public">
+    <name>setPlan</name>
+    <full_name>\Matscode\Paystack\Resources\Transaction::setPlan()</full_name>
+    <value></value>
+                <argument line="120" by_reference="false">
+    <name>plan</name>
     <default></default>
-    <type></type>
+    <type>string</type>
 </argument>
 
-        <docblock line="145">
-    <description>Compares the amount paid by customer to the amount passed into it</description>
+        <docblock line="120">
+    <description>Ignore setting amount when setting plan and vice versa. Plan takes precedence</description>
     <long-description></long-description>
                     <tag
                 name="param"
                 description=""
-                                                                 variable="amountExpected"                                />
+                                                                 variable="plan"                                 type="string"/>
                             <tag
                 name="return"
                 description=""
-                                                                                                 type="bool"/>
+                                                                                                 type="$this"/>
             </docblock>
 
 </method>
 
-                                            <method final="false" abstract="false" static="false" namespace="\Matscode\Paystack\Resources" line="163" visibility="public">
-    <name>getAuthorizationCode</name>
-    <full_name>\Matscode\Paystack\Resources\Transaction::getAuthorizationCode()</full_name>
-    <value></value>
-                <argument line="163" by_reference="false">
-    <name>reference</name>
-    <default>null</default>
-    <type>null</type>
-</argument>
-
-        <docblock line="163">
-    <description></description>
-    <long-description></long-description>
-                    <tag
-                name="param"
-                description=""
-                                                                 variable="reference"                                 type="null"/>
-                            <tag
-                name="return"
-                description=""
-                                                                                                 type="string|null"/>
-                            <tag
-                name="throws"
-                description=""
-                                                                                                 type="\Exception"/>
-            </docblock>
-
-</method>
-
-                                            <method final="false" abstract="false" static="false" namespace="\Matscode\Paystack\Resources" line="180" visibility="public">
+                                            <method final="false" abstract="false" static="false" namespace="\Matscode\Paystack\Resources" line="134" visibility="public">
     <name>setEmail</name>
     <full_name>\Matscode\Paystack\Resources\Transaction::setEmail()</full_name>
     <value></value>
-                <argument line="180" by_reference="false">
+                <argument line="134" by_reference="false">
     <name>email</name>
     <default></default>
     <type></type>
 </argument>
 
-        <docblock line="180">
+        <docblock line="134">
     <description></description>
     <long-description></long-description>
                     <tag
@@ -540,30 +484,30 @@
 
 </method>
 
-                                            <method final="false" abstract="false" static="false" namespace="\Matscode\Paystack\Resources" line="188" visibility="public">
+                                            <method final="false" abstract="false" static="false" namespace="\Matscode\Paystack\Resources" line="142" visibility="public">
     <name>getEmail</name>
     <full_name>\Matscode\Paystack\Resources\Transaction::getEmail()</full_name>
     <value></value>
-            <docblock line="188">
+            <docblock line="142">
     <description></description>
     <long-description></long-description>
                 </docblock>
 
 </method>
 
-                                            <method final="false" abstract="false" static="false" namespace="\Matscode\Paystack\Resources" line="200" visibility="public">
+                                            <method final="false" abstract="false" static="false" namespace="\Matscode\Paystack\Resources" line="156" visibility="public">
     <name>setAmount</name>
     <full_name>\Matscode\Paystack\Resources\Transaction::setAmount()</full_name>
     <value></value>
-                <argument line="200" by_reference="false">
+                <argument line="156" by_reference="false">
     <name>amount</name>
     <default></default>
     <type>int</type>
 </argument>
 
-        <docblock line="200">
+        <docblock line="156">
     <description>Set transaction amount in kobo(NGN) or pesewas(GHS)</description>
-    <long-description></long-description>
+    <long-description>NOTE: Setting plan overwrites your defined amount</long-description>
                     <tag
                 name="param"
                 description=""
@@ -576,11 +520,11 @@
 
 </method>
 
-                                            <method final="false" abstract="false" static="false" namespace="\Matscode\Paystack\Resources" line="210" visibility="public">
+                                            <method final="false" abstract="false" static="false" namespace="\Matscode\Paystack\Resources" line="166" visibility="public">
     <name>getAmount</name>
     <full_name>\Matscode\Paystack\Resources\Transaction::getAmount()</full_name>
     <value></value>
-            <docblock line="210">
+            <docblock line="166">
     <description></description>
     <long-description></long-description>
                     <tag
@@ -591,17 +535,17 @@
 
 </method>
 
-                                            <method final="false" abstract="false" static="false" namespace="\Matscode\Paystack\Resources" line="221" visibility="public">
+                                            <method final="false" abstract="false" static="false" namespace="\Matscode\Paystack\Resources" line="177" visibility="public">
     <name>setReference</name>
     <full_name>\Matscode\Paystack\Resources\Transaction::setReference()</full_name>
     <value></value>
-                <argument line="221" by_reference="false">
+                <argument line="177" by_reference="false">
     <name>reference</name>
     <default></default>
     <type>string</type>
 </argument>
 
-        <docblock line="221">
+        <docblock line="177">
     <description>Sets the transaction reference code/id</description>
     <long-description></long-description>
                     <tag
@@ -616,18 +560,18 @@
 
 </method>
 
-                                            <method final="false" abstract="false" static="false" namespace="\Matscode\Paystack\Resources" line="234" visibility="public">
+                                            <method final="false" abstract="false" static="false" namespace="\Matscode\Paystack\Resources" line="192" visibility="public">
     <name>getReference</name>
     <full_name>\Matscode\Paystack\Resources\Transaction::getReference()</full_name>
     <value></value>
-                <argument line="234" by_reference="false">
+                <argument line="192" by_reference="false">
     <name>afterInitialize</name>
     <default>false</default>
     <type>bool</type>
 </argument>
 
-        <docblock line="234">
-    <description></description>
+        <docblock line="192">
+    <description>Returns the transaction code/id used</description>
     <long-description></long-description>
                     <tag
                 name="param"
@@ -641,17 +585,17 @@
 
 </method>
 
-                                            <method final="false" abstract="false" static="false" namespace="\Matscode\Paystack\Resources" line="252" visibility="public">
+                                            <method final="false" abstract="false" static="false" namespace="\Matscode\Paystack\Resources" line="204" visibility="public">
     <name>setCallbackUrl</name>
     <full_name>\Matscode\Paystack\Resources\Transaction::setCallbackUrl()</full_name>
     <value></value>
-                <argument line="252" by_reference="false">
+                <argument line="204" by_reference="false">
     <name>callbackUrl</name>
     <default></default>
     <type>string</type>
 </argument>
 
-        <docblock line="252">
+        <docblock line="204">
     <description>To set callback URL, can be used to override callback URL set on paystack dashboard</description>
     <long-description></long-description>
                     <tag
@@ -666,48 +610,142 @@
 
 </method>
 
-                                                                <method final="false" abstract="false" static="false" namespace="\Matscode\Paystack\Traits" line="11" visibility="public">
+                                            <method final="false" abstract="false" static="false" namespace="\Matscode\Paystack\Resources" line="222" visibility="public">
+    <name>list</name>
+    <full_name>\Matscode\Paystack\Resources\Transaction::list()</full_name>
+    <value></value>
+                <argument line="222" by_reference="false">
+    <name>numberOfRecords</name>
+    <default>50</default>
+    <type>int</type>
+</argument>
+
+            <argument line="222" by_reference="false">
+    <name>page</name>
+    <default>1</default>
+    <type>int</type>
+</argument>
+
+            <argument line="222" by_reference="false">
+    <name>otherOptions</name>
+    <default>[]</default>
+    <type>array</type>
+</argument>
+
+        <docblock line="222">
+    <description>Get the list of all transactions</description>
+    <long-description></long-description>
+                    <tag
+                name="link"
+                description=""
+                 link="https://paystack.com/docs/api/#transaction-list"                                                                                />
+                            <tag
+                name="param"
+                description="number of record per page"
+                                                                 variable="numberOfRecords"                                 type="int"/>
+                <tag
+                name="param"
+                description="page number"
+                                                                 variable="page"                                 type="int"/>
+                <tag
+                name="param"
+                description=""
+                                                                 variable="otherOptions"                                 type="array"/>
+                            <tag
+                name="return"
+                description=""
+                                                                                                 type="\StdClass"/>
+                            <tag
+                name="throws"
+                description=""
+                                                                                                 type="\GuzzleHttp\Exception\GuzzleException"/>
+            </docblock>
+
+</method>
+
+                                                                <method final="false" abstract="false" static="false" namespace="\Matscode\Paystack\Traits" line="18" visibility="public">
     <name>setBasePath</name>
     <full_name>\Matscode\Paystack\Traits\ResourcePath::setBasePath()</full_name>
     <value></value>
-    <inherited_from>\Matscode\Paystack\Traits\ResourcePath</inherited_from>            <argument line="11" by_reference="false">
+    <inherited_from>\Matscode\Paystack\Traits\ResourcePath</inherited_from>            <argument line="18" by_reference="false">
     <name>basePath</name>
     <default></default>
     <type>string</type>
 </argument>
 
-        <docblock line="11">
-    <description></description>
+        <docblock line="18">
+    <description>Use to set resource base path</description>
     <long-description></long-description>
-                            </docblock>
+                    <tag
+                name="param"
+                description=""
+                                                                 variable="basePath"                                 type="string"/>
+                        </docblock>
 
 </method>
 
-                                            <method final="false" abstract="false" static="false" namespace="\Matscode\Paystack\Traits" line="16" visibility="public">
-    <name>setPath</name>
-    <full_name>\Matscode\Paystack\Traits\ResourcePath::setPath()</full_name>
+                                            <method final="false" abstract="false" static="false" namespace="\Matscode\Paystack\Traits" line="28" visibility="public">
+    <name>getBasePath</name>
+    <full_name>\Matscode\Paystack\Traits\ResourcePath::getBasePath()</full_name>
     <value></value>
-    <inherited_from>\Matscode\Paystack\Traits\ResourcePath</inherited_from>            <argument line="16" by_reference="false">
+    <inherited_from>\Matscode\Paystack\Traits\ResourcePath</inherited_from>        <docblock line="28">
+    <description>Get resource base path</description>
+    <long-description></long-description>
+                    <tag
+                name="return"
+                description=""
+                                                                                                 type="string"/>
+            </docblock>
+
+</method>
+
+                                            <method final="false" abstract="false" static="false" namespace="\Matscode\Paystack\Traits" line="39" visibility="public">
+    <name>makePath</name>
+    <full_name>\Matscode\Paystack\Traits\ResourcePath::makePath()</full_name>
+    <value></value>
+    <inherited_from>\Matscode\Paystack\Traits\ResourcePath</inherited_from>            <argument line="39" by_reference="false">
+    <name>path</name>
+    <default>&#039;&#039;</default>
+    <type>string</type>
+</argument>
+
+        <docblock line="39">
+    <description>Gets the constructed path prepended with the base path</description>
+    <long-description></long-description>
+                    <tag
+                name="param"
+                description=""
+                                                                 variable="path"                                 type="string"/>
+                            <tag
+                name="return"
+                description=""
+                                                                                                 type="string"/>
+            </docblock>
+
+</method>
+
+                                            <method final="false" abstract="false" static="false" namespace="\Matscode\Paystack\Traits" line="54" visibility="public">
+    <name>cleanPath</name>
+    <full_name>\Matscode\Paystack\Traits\ResourcePath::cleanPath()</full_name>
+    <value></value>
+    <inherited_from>\Matscode\Paystack\Traits\ResourcePath</inherited_from>            <argument line="54" by_reference="false">
     <name>path</name>
     <default></default>
     <type>string</type>
 </argument>
 
-        <docblock line="16">
-    <description></description>
+        <docblock line="54">
+    <description>Trim possible redundant slash and add one at the end</description>
     <long-description></long-description>
-                            </docblock>
-
-</method>
-
-                                            <method final="false" abstract="false" static="false" namespace="\Matscode\Paystack\Traits" line="21" visibility="public">
-    <name>getPath</name>
-    <full_name>\Matscode\Paystack\Traits\ResourcePath::getPath()</full_name>
-    <value></value>
-    <inherited_from>\Matscode\Paystack\Traits\ResourcePath</inherited_from>        <docblock line="21">
-    <description></description>
-    <long-description></long-description>
-                </docblock>
+                    <tag
+                name="param"
+                description=""
+                                                                 variable="path"                                 type="string"/>
+                            <tag
+                name="return"
+                description=""
+                                                                                                 type="string"/>
+            </docblock>
 
 </method>
 
@@ -717,13 +755,13 @@
             
             <parse_markers></parse_markers>
         </file>
-            <file path="src/Traits/ResourcePath.php" hash="cfdfcdcb526d3df5ee2d9ae13d88f170">
+            <file path="src/Traits/ResourcePath.php" hash="1946702934c2473d20765f64c18213c4">
             <docblock line="0">
     <description></description>
     <long-description></long-description>
                     <tag
                 name="package"
-                description=""
+                description="Paystack\Traits"
                                                                                                 />
             </docblock>
 
@@ -736,19 +774,19 @@
                         
                         
                         
-                                        <trait namespace="\Matscode\Paystack\Traits" line="7">
+                                        <trait namespace="\Matscode\Paystack\Traits" line="9">
                     <name>ResourcePath</name>
                     <full_name>\Matscode\Paystack\Traits\ResourcePath</full_name>
-                    <docblock line="7">
+                    <docblock line="9">
     <description></description>
     <long-description></long-description>
                     <tag
                 name="package"
-                description=""
+                description="Paystack\Traits"
                                                                                                 />
                                                             </docblock>
 
-                                            <property namespace="\Matscode\Paystack\Traits\ResourcePath" line="9" visibility="private">
+                                            <property namespace="\Matscode\Paystack\Traits\ResourcePath" line="11" visibility="private">
     <name>basePath</name>
     <full_name>\Matscode\Paystack\Traits\ResourcePath::$basePath</full_name>
     <default></default>
@@ -759,7 +797,7 @@
 
 </property>
 
-                                            <property namespace="\Matscode\Paystack\Traits\ResourcePath" line="9" visibility="private">
+                                            <property namespace="\Matscode\Paystack\Traits\ResourcePath" line="11" visibility="private">
     <name>path</name>
     <full_name>\Matscode\Paystack\Traits\ResourcePath::$path</full_name>
     <default></default>
@@ -771,48 +809,89 @@
 </property>
 
                     
-                                            <method final="false" abstract="false" static="false" namespace="\Matscode\Paystack\Traits" line="11" visibility="public">
+                                            <method final="false" abstract="false" static="false" namespace="\Matscode\Paystack\Traits" line="18" visibility="public">
     <name>setBasePath</name>
     <full_name>\Matscode\Paystack\Traits\ResourcePath::setBasePath()</full_name>
     <value></value>
-                <argument line="11" by_reference="false">
+                <argument line="18" by_reference="false">
     <name>basePath</name>
     <default></default>
     <type>string</type>
 </argument>
 
-        <docblock line="11">
-    <description></description>
+        <docblock line="18">
+    <description>Use to set resource base path</description>
     <long-description></long-description>
-                            </docblock>
+                    <tag
+                name="param"
+                description=""
+                                                                 variable="basePath"                                 type="string"/>
+                        </docblock>
 
 </method>
 
-                                            <method final="false" abstract="false" static="false" namespace="\Matscode\Paystack\Traits" line="16" visibility="public">
-    <name>setPath</name>
-    <full_name>\Matscode\Paystack\Traits\ResourcePath::setPath()</full_name>
+                                            <method final="false" abstract="false" static="false" namespace="\Matscode\Paystack\Traits" line="28" visibility="public">
+    <name>getBasePath</name>
+    <full_name>\Matscode\Paystack\Traits\ResourcePath::getBasePath()</full_name>
     <value></value>
-                <argument line="16" by_reference="false">
+            <docblock line="28">
+    <description>Get resource base path</description>
+    <long-description></long-description>
+                    <tag
+                name="return"
+                description=""
+                                                                                                 type="string"/>
+            </docblock>
+
+</method>
+
+                                            <method final="false" abstract="false" static="false" namespace="\Matscode\Paystack\Traits" line="39" visibility="public">
+    <name>makePath</name>
+    <full_name>\Matscode\Paystack\Traits\ResourcePath::makePath()</full_name>
+    <value></value>
+                <argument line="39" by_reference="false">
+    <name>path</name>
+    <default>&#039;&#039;</default>
+    <type>string</type>
+</argument>
+
+        <docblock line="39">
+    <description>Gets the constructed path prepended with the base path</description>
+    <long-description></long-description>
+                    <tag
+                name="param"
+                description=""
+                                                                 variable="path"                                 type="string"/>
+                            <tag
+                name="return"
+                description=""
+                                                                                                 type="string"/>
+            </docblock>
+
+</method>
+
+                                            <method final="false" abstract="false" static="false" namespace="\Matscode\Paystack\Traits" line="54" visibility="public">
+    <name>cleanPath</name>
+    <full_name>\Matscode\Paystack\Traits\ResourcePath::cleanPath()</full_name>
+    <value></value>
+                <argument line="54" by_reference="false">
     <name>path</name>
     <default></default>
     <type>string</type>
 </argument>
 
-        <docblock line="16">
-    <description></description>
+        <docblock line="54">
+    <description>Trim possible redundant slash and add one at the end</description>
     <long-description></long-description>
-                            </docblock>
-
-</method>
-
-                                            <method final="false" abstract="false" static="false" namespace="\Matscode\Paystack\Traits" line="21" visibility="public">
-    <name>getPath</name>
-    <full_name>\Matscode\Paystack\Traits\ResourcePath::getPath()</full_name>
-    <value></value>
-            <docblock line="21">
-    <description></description>
-    <long-description></long-description>
-                </docblock>
+                    <tag
+                name="param"
+                description=""
+                                                                 variable="path"                                 type="string"/>
+                            <tag
+                name="return"
+                description=""
+                                                                                                 type="string"/>
+            </docblock>
 
 </method>
 
@@ -1136,7 +1215,7 @@
             
             <parse_markers></parse_markers>
         </file>
-            <file path="src/Utility/Text.php" hash="5af33d227b42f9ed188b118323ced492">
+            <file path="src/Utility/Text.php" hash="58dedc03341eaa7305292577a095c4dc">
             <docblock line="0">
     <description>Description</description>
     <long-description></long-description>
@@ -1175,8 +1254,8 @@
                                         
                                         
                                             <method final="false" abstract="false" static="true" namespace="\Matscode\Paystack\Utility" line="27" visibility="public">
-    <name>uniqueRef</name>
-    <full_name>\Matscode\Paystack\Utility\Text::uniqueRef()</full_name>
+    <name>uniqueStr</name>
+    <full_name>\Matscode\Paystack\Utility\Text::uniqueStr()</full_name>
     <value></value>
                 <argument line="27" by_reference="false">
     <name>length</name>
@@ -1242,6 +1321,244 @@
                 name="return"
                 description=""
                                                                                                  type="string"/>
+            </docblock>
+
+</method>
+
+                                                        </class>
+            
+                        
+            
+            <parse_markers></parse_markers>
+        </file>
+            <file path="src/Exceptions/InvalidArgumentException.php" hash="3b53e26a55f0cf600d43a6ff82a76e7c">
+            <docblock line="0">
+    <description></description>
+    <long-description></long-description>
+                    <tag
+                name="package"
+                description=""
+                                                                                                />
+            </docblock>
+
+
+            
+                            <namespace-alias name="\Matscode\Paystack\Exceptions"/>
+            
+
+            
+                        
+                        
+                                        <class final="false" abstract="false" namespace="\Matscode\Paystack\Exceptions" line="7">
+                    <name>InvalidArgumentException</name>
+                    <full_name>\Matscode\Paystack\Exceptions\InvalidArgumentException</full_name>
+                    <docblock line="7">
+    <description></description>
+    <long-description></long-description>
+                    <tag
+                name="package"
+                description=""
+                                                                                                />
+                                                            </docblock>
+
+                                            <extends>\InvalidArgumentException</extends> 
+                    
+                                        
+                                        
+                                                        </class>
+            
+                        
+            
+            <parse_markers></parse_markers>
+        </file>
+            <file path="src/Exceptions/JsonException.php" hash="ad9ac8b2c87c9cbb9274c5dbb3e997f3">
+            <docblock line="0">
+    <description></description>
+    <long-description></long-description>
+                    <tag
+                name="package"
+                description=""
+                                                                                                />
+            </docblock>
+
+
+            
+                            <namespace-alias name="\Matscode\Paystack\Exceptions"/>
+            
+
+            
+                        
+                        
+                                        <class final="false" abstract="false" namespace="\Matscode\Paystack\Exceptions" line="7">
+                    <name>JsonException</name>
+                    <full_name>\Matscode\Paystack\Exceptions\JsonException</full_name>
+                    <docblock line="7">
+    <description></description>
+    <long-description></long-description>
+                    <tag
+                name="package"
+                description=""
+                                                                                                />
+                                                            </docblock>
+
+                                            <extends>\JsonException</extends> 
+                    
+                                        
+                                        
+                                                        </class>
+            
+                        
+            
+            <parse_markers></parse_markers>
+        </file>
+            <file path="src/Utility/Helpers.php" hash="f6e353709ea429ddc7c9d5e9fb6b36d7">
+            <docblock line="0">
+    <description></description>
+    <long-description></long-description>
+                    <tag
+                name="package"
+                description="Paystack\Utility"
+                                                                                                />
+            </docblock>
+
+
+            
+                            <namespace-alias name="\Matscode\Paystack\Utility"/>
+            
+
+            
+                        
+                        
+                                        <class final="true" abstract="false" namespace="\Matscode\Paystack\Utility" line="11">
+                    <name>Helpers</name>
+                    <full_name>\Matscode\Paystack\Utility\Helpers</full_name>
+                    <docblock line="11">
+    <description></description>
+    <long-description></long-description>
+                    <tag
+                name="package"
+                description="Paystack\Utility"
+                                                                                                />
+                                                            </docblock>
+
+                    
+                    
+                                        
+                                        
+                                            <method final="false" abstract="false" static="true" namespace="\Matscode\Paystack\Utility" line="19" visibility="public">
+    <name>streamToString</name>
+    <full_name>\Matscode\Paystack\Utility\Helpers::streamToString()</full_name>
+    <value></value>
+                <argument line="19" by_reference="false">
+    <name>stream</name>
+    <default></default>
+    <type></type>
+</argument>
+
+        <docblock line="19">
+    <description>Convert PSR7 Stream to string</description>
+    <long-description></long-description>
+                    <tag
+                name="param"
+                description=""
+                                                                 variable="stream"                                />
+                            <tag
+                name="return"
+                description=""
+                                                                                                 type="string"/>
+            </docblock>
+
+</method>
+
+                                            <method final="false" abstract="false" static="true" namespace="\Matscode\Paystack\Utility" line="31" visibility="public">
+    <name>JSONStreamToObj</name>
+    <full_name>\Matscode\Paystack\Utility\Helpers::JSONStreamToObj()</full_name>
+    <value></value>
+                <argument line="31" by_reference="false">
+    <name>stream</name>
+    <default></default>
+    <type></type>
+</argument>
+
+        <docblock line="31">
+    <description>Parse response PSR7 stream to Obj</description>
+    <long-description></long-description>
+                    <tag
+                name="param"
+                description=""
+                                                                 variable="stream"                                />
+                            <tag
+                name="return"
+                description=""
+                                                                                                 type="\StdClass"/>
+                            <tag
+                name="throws"
+                description=""
+                                                                                                 type="\Matscode\Paystack\Exceptions\JsonException"/>
+            </docblock>
+
+</method>
+
+                                            <method final="false" abstract="false" static="true" namespace="\Matscode\Paystack\Utility" line="45" visibility="public">
+    <name>parseJSON</name>
+    <full_name>\Matscode\Paystack\Utility\Helpers::parseJSON()</full_name>
+    <value></value>
+                <argument line="45" by_reference="false">
+    <name>string</name>
+    <default></default>
+    <type>string</type>
+</argument>
+
+            <argument line="45" by_reference="false">
+    <name>asObject</name>
+    <default>true</default>
+    <type>bool</type>
+</argument>
+
+        <docblock line="45">
+    <description>Parse JSON string to Object</description>
+    <long-description></long-description>
+                    <tag
+                name="param"
+                description="Valid JSON string to parse"
+                                                                 variable="string"                                 type="string"/>
+                <tag
+                name="param"
+                description="Parses JSON string as StdClass Object by default, set to false to parse as associate array"
+                                                                 variable="asObject"                                 type="bool"/>
+                            <tag
+                name="return"
+                description=""
+                                                                                                 type="\StdClass"/>
+                            <tag
+                name="throws"
+                description=""
+                                                                                                 type="\Matscode\Paystack\Exceptions\JsonException"/>
+            </docblock>
+
+</method>
+
+                                            <method final="false" abstract="false" static="true" namespace="\Matscode\Paystack\Utility" line="96" visibility="public">
+    <name>responseToObj</name>
+    <full_name>\Matscode\Paystack\Utility\Helpers::responseToObj()</full_name>
+    <value></value>
+                <argument line="96" by_reference="false">
+    <name>response</name>
+    <default></default>
+    <type>\Psr\Http\Message\ResponseInterface</type>
+</argument>
+
+        <docblock line="96">
+    <description>Parse PSR7 Response to Obj</description>
+    <long-description></long-description>
+                    <tag
+                name="param"
+                description=""
+                                                                 variable="response"                                 type="\Psr\Http\Message\ResponseInterface"/>
+                            <tag
+                name="return"
+                description=""
+                                                                                                 type="\StdClass"/>
             </docblock>
 
 </method>
