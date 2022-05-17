@@ -6,45 +6,32 @@
 namespace Matscode\Paystack\Utility;
 
 use Matscode\Paystack\Exceptions\JsonException;
-use Psr\Http\Message\ResponseInterface;
 
 final class Helpers
 {
     /**
-     * Convert PSR7 Stream to string
-     *
-     * @param $stream
-     * @return string
-     */
-    public static function streamToString($stream): string
-    {
-        return (string)$stream;
-    }
-
-    /**
      * Parse response PSR7 stream to Obj
      *
-     * @param $stream
+     * @param $jsonString
      * @return \StdClass
      * @throws JsonException
      */
-    public static function JSONStreamToObj($stream): \StdClass
+    public static function JSONStringToObj($jsonString): \StdClass
     {
-        return self::parseJSON(self::streamToString($stream));
+        return self::parseJSON((string)$jsonString);
     }
 
     /**
      * Parse JSON string to Object
      *
      * @param string $string Valid JSON string to parse
-     * @param bool $asObject Parses JSON string as StdClass Object by default, set to false to parse as associate array
+     * @param bool $asObject Parses JSON string as StdClass Object by default, set to false if you want to parse as associate array
      *
-     * @return \StdClass
      * @throws JsonException
      */
-    public static function parseJSON(string $string, bool $asObject = true): \StdClass
+    public static function parseJSON(string $string, bool $asObject = true): \stdClass
     {
-        if(!$string){
+        if (!$string) {
             return json_decode('{}', !$asObject, 4);
         }
         // limit json string parse depth
@@ -85,16 +72,5 @@ final class Helpers
         }
 
         return $decodedJson;
-    }
-
-    /**
-     * Parse PSR7 Response to Obj
-     *
-     * @param ResponseInterface $response
-     * @return \StdClass
-     */
-    public static function responseToObj(ResponseInterface $response): \StdClass
-    {
-        return self::JSONStreamToObj($response->getBody());
     }
 }

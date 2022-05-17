@@ -2,10 +2,15 @@
 /**
  * @ignore
  */
+
 namespace Matscode\Paystack;
 
-class ResourceRegistry {
-    public static $registry = [
-        'transaction' => \Matscode\Paystack\Resources\Transaction::class
+use Matscode\Paystack\Resources;
+
+class ResourceRegistry
+{
+    public static array $registry = [
+        'transaction' => Resources\Transaction::class,
+        'bank' => Resources\Bank::class,
     ];
 }

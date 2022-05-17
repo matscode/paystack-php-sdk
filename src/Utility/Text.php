@@ -14,18 +14,18 @@
 	{
 		/**
 		 *
-		 * @author Hackan <hackan@gmail.com>
-		 * @link   https://php.net/manual/en/function.uniqid.php#120123
-		 *
 		 * @param int $length
 		 *
 		 * @param int $capsMix
 		 *
-		 * @return bool|string
+		 * @return string
 		 * @throws \Exception
+		 *@author Hackan <hackan@gmail.com>
+		 * @link   https://php.net/manual/en/function.uniqid.php#120123
+		 *
 		 */
-		public static function uniqueStr($length = 15, $capsMix = 5 )
-		{
+		public static function uniqueStr(int $length = 11, int $capsMix = 5 ): string
+        {
 			// uniqid gives 15 chars, but you could adjust it to your needs.
 			if ( function_exists( "random_bytes" ) ) {
 				$bytes = random_bytes( ceil( $length / 2 ) );

@@ -9,12 +9,15 @@
 
 namespace Matscode\Paystack\Resources;
 
+use GuzzleHttp\Exception\GuzzleException;
 use Matscode\Paystack\Exceptions\InvalidArgumentException;
+use Matscode\Paystack\Exceptions\JsonException;
 use Matscode\Paystack\Interfaces\ResourceInterface;
 use Matscode\Paystack\Traits\ResourcePath;
 use Matscode\Paystack\Utility\Helpers;
 use Matscode\Paystack\Utility\HTTP\HTTPClient;
 use Matscode\Paystack\Utility\Text;
+use stdClass;
 
 class Transaction implements ResourceInterface
 {
@@ -22,6 +25,9 @@ class Transaction implements ResourceInterface
 
     protected $httpClient, $callbackUrl, $data;
 
+    /**
+     * @throws \Exception
+     */
     public function __construct(HTTPClient $HTTPClient)
     {
         $this->setBasePath('transaction');
@@ -36,10 +42,11 @@ class Transaction implements ResourceInterface
      * @link https://paystack.com/docs/api/#transaction-initialize
      *
      * @param array $data
-     * @return mixed|\stdClass
-     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @return stdClass
+     * @throws GuzzleException
+     * @throws JsonException
      */
-    public function initialize(array $data = []): \stdClass
+    public function initialize(array $data = []): stdClass
     {
         $data = array_merge($this->data, $data);
 
@@ -54,9 +61,9 @@ class Transaction implements ResourceInterface
 
         $this->data = []; // empty the bag
 
-        return Helpers::responseToObj($this->httpClient->post($this->makePath('initialize'), [
+        return Helpers::JSONStringToObj($this->httpClient->post($this->makePath('initialize'), [
             'json' => $data
-        ]));
+        ])->getBody());
     }
 
     /**
@@ -66,12 +73,13 @@ class Transaction implements ResourceInterface
      *
      * @param string $referenceCode
      *
-     * @return \StdClass
-     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @return StdClass
+     * @throws GuzzleException
+     * @throws JsonException
      */
-    public function verify(string $referenceCode): \StdClass
+    public function verify(string $referenceCode): StdClass
     {
-        return Helpers::responseToObj($this->httpClient->get($this->makePath('verify/' . $referenceCode)));
+        return Helpers::JSONStringToObj($this->httpClient->get($this->makePath('verify/' . $referenceCode))->getBody());
     }
 
     /**
@@ -80,7 +88,8 @@ class Transaction implements ResourceInterface
      * @param string $reference
      *
      * @return bool
-     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws GuzzleException
+     * @throws JsonException
      */
     public function isSuccessful(string $reference): bool
     {
@@ -91,7 +100,7 @@ class Transaction implements ResourceInterface
         // check if transaction is successful
         if (isset($response->data)
             && is_object($response->data)
-            && $response->status == true
+            && $response->status
             && $response->data->status == 'success'
         ) {
             $isSuccessful = true;
@@ -123,7 +132,7 @@ class Transaction implements ResourceInterface
      */
     public function setPlan(string $plan): Transaction
     {
-        // set amount to 0 to Invalid amount error when setting a plan
+        // set amount to 0 to Invalidate amount error when setting a plan
         $this->data['amount'] = 0;
         $this->data['plan'] = $plan;
 
@@ -131,7 +140,7 @@ class Transaction implements ResourceInterface
     }
 
     /**
-     * @param $email
+     * @param string $email
      *
      * @return $this
      */
@@ -193,7 +202,7 @@ class Transaction implements ResourceInterface
      * @return null
      *
      */
-    public function getReference($afterInitialize = false)
+    public function getReference(bool $afterInitialize = false)
     {
         return $this->data['reference'];
     }
@@ -220,15 +229,16 @@ class Transaction implements ResourceInterface
      * @param int $numberOfRecords number of record per page
      * @param int $page page number
      * @param array $otherOptions
-     * @return \StdClass
-     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @return stdClass
+     * @throws GuzzleException
+     * @throws JsonException
      */
-    public function list($numberOfRecords = 50, $page = 1, $otherOptions = []): \StdClass
+    public function list(int $numberOfRecords = 50, int $page = 1, array $otherOptions = []): stdClass
     {
-        return Helpers::responseToObj($this->httpClient->get($this->makePath() . '?' . http_build_query($otherOptions + [
+        return Helpers::JSONStringToObj($this->httpClient->get($this->makePath() . '?' . http_build_query($otherOptions + [
                     'perPage' => $numberOfRecords,
                     'page' => $page
-                ])));
+                ]))->getBody());
     }
 
 }

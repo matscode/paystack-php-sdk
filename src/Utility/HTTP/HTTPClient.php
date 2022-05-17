@@ -9,7 +9,7 @@ use GuzzleHttp\Client;
 class HTTPClient extends Client
 {
 
-    private $apiBaseUrl = 'https://api.paystack.co/'; // with trailing slash
+    private string $apiBaseUrl = 'https://api.paystack.co/'; // with trailing slash
 
     public function __construct(string $secretKey)
     {
@@ -24,6 +24,6 @@ class HTTPClient extends Client
 
     public function requestFactory(array $messageComponent)
     {
-        // TODO: Validate the need for this function before implementing...
+        // TODO: Justify the need for this function before implementing...
     }
 }
