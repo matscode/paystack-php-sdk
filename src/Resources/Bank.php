@@ -42,6 +42,10 @@ class Bank implements ResourceInterface
     }
 
     /**
+     * Resolve account number to get account name for valid account verification
+     *
+     * @link https://paystack.com/docs/api/#verification-resolve-account
+     *
      * @param $bank_code
      * @param $account_number
      * @return stdClass
