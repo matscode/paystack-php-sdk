@@ -22,6 +22,10 @@
             <ignore hidden="true" symlinks="true">
                 <path>tests/**/*</path>
                 <path>src/ResourceRegistry.php</path>
+                <path>src/Paystack.php</path>
+                <path>src/Providers</path>
+                <path>src/Interfaces</path>
+                <path>src/Traits</path>
             </ignore>
         </api>
     </version>

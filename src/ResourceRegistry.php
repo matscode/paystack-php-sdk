@@ -1,7 +1,4 @@
 <?php
-/**
- * @ignore
- */
 
 namespace Matscode\Paystack;
 

@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Matscode\Paystack;
 
 use Matscode\Paystack\Providers\PaystackResourceProvider;

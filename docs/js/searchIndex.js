@@ -1,45 +1,45 @@
 Search.appendIndex(
     [
                 {
+            "fqsen": "\\Matscode\\Paystack\\Exceptions\\InvalidArgumentException",
+            "name": "InvalidArgumentException",
+            "summary": "",
+            "url": "classes/Matscode-Paystack-Exceptions-InvalidArgumentException.html"
+        },                {
             "fqsen": "\\Matscode\\Paystack\\Exceptions\\InvalidResourceException",
             "name": "InvalidResourceException",
             "summary": "",
             "url": "classes/Matscode-Paystack-Exceptions-InvalidResourceException.html"
         },                {
-            "fqsen": "\\Matscode\\Paystack\\Interfaces\\ResourceInterface",
-            "name": "ResourceInterface",
+            "fqsen": "\\Matscode\\Paystack\\Exceptions\\JsonException",
+            "name": "JsonException",
             "summary": "",
-            "url": "classes/Matscode-Paystack-Interfaces-ResourceInterface.html"
+            "url": "classes/Matscode-Paystack-Exceptions-JsonException.html"
         },                {
-            "fqsen": "\\Matscode\\Paystack\\Interfaces\\ResourceInterface\u003A\u003A__construct\u0028\u0029",
+            "fqsen": "\\Matscode\\Paystack\\Resources\\Bank",
+            "name": "Bank",
+            "summary": "",
+            "url": "classes/Matscode-Paystack-Resources-Bank.html"
+        },                {
+            "fqsen": "\\Matscode\\Paystack\\Resources\\Bank\u003A\u003A__construct\u0028\u0029",
             "name": "__construct",
             "summary": "",
-            "url": "classes/Matscode-Paystack-Interfaces-ResourceInterface.html#method___construct"
+            "url": "classes/Matscode-Paystack-Resources-Bank.html#method___construct"
         },                {
-            "fqsen": "\\Matscode\\Paystack\\Paystack",
-            "name": "Paystack",
-            "summary": "Class\u0020PaystackResourceProvider",
-            "url": "classes/Matscode-Paystack-Paystack.html"
+            "fqsen": "\\Matscode\\Paystack\\Resources\\Bank\u003A\u003Alist\u0028\u0029",
+            "name": "list",
+            "summary": "List\u0020available\u0020bank\u0020information",
+            "url": "classes/Matscode-Paystack-Resources-Bank.html#method_list"
         },                {
-            "fqsen": "\\Matscode\\Paystack\\Providers\\PaystackResourceProvider",
-            "name": "PaystackResourceProvider",
-            "summary": "Class\u0020PaystackResourceProvider",
-            "url": "classes/Matscode-Paystack-Providers-PaystackResourceProvider.html"
+            "fqsen": "\\Matscode\\Paystack\\Resources\\Bank\u003A\u003Aresolve\u0028\u0029",
+            "name": "resolve",
+            "summary": "Resolve\u0020account\u0020number\u0020to\u0020get\u0020account\u0020name\u0020for\u0020valid\u0020account\u0020verification",
+            "url": "classes/Matscode-Paystack-Resources-Bank.html#method_resolve"
         },                {
-            "fqsen": "\\Matscode\\Paystack\\Providers\\PaystackResourceProvider\u003A\u003A__construct\u0028\u0029",
-            "name": "__construct",
+            "fqsen": "\\Matscode\\Paystack\\Resources\\Bank\u003A\u003A\u0024httpClient",
+            "name": "httpClient",
             "summary": "",
-            "url": "classes/Matscode-Paystack-Providers-PaystackResourceProvider.html#method___construct"
-        },                {
-            "fqsen": "\\Matscode\\Paystack\\Providers\\PaystackResourceProvider\u003A\u003A\u0024HTTPClient",
-            "name": "HTTPClient",
-            "summary": "",
-            "url": "classes/Matscode-Paystack-Providers-PaystackResourceProvider.html#property_HTTPClient"
-        },                {
-            "fqsen": "\\Matscode\\Paystack\\Providers\\PaystackResourceProvider\u003A\u003A\u0024callbackUrl",
-            "name": "callbackUrl",
-            "summary": "",
-            "url": "classes/Matscode-Paystack-Providers-PaystackResourceProvider.html#property_callbackUrl"
+            "url": "classes/Matscode-Paystack-Resources-Bank.html#property_httpClient"
         },                {
             "fqsen": "\\Matscode\\Paystack\\Resources\\Transaction",
             "name": "Transaction",
@@ -131,70 +131,20 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Matscode-Paystack-Resources-Transaction.html#property_data"
         },                {
-            "fqsen": "\\Matscode\\Paystack\\Traits\\ResourcePath",
-            "name": "ResourcePath",
+            "fqsen": "\\Matscode\\Paystack\\Utility\\Helpers",
+            "name": "Helpers",
             "summary": "",
-            "url": "classes/Matscode-Paystack-Traits-ResourcePath.html"
+            "url": "classes/Matscode-Paystack-Utility-Helpers.html"
         },                {
-            "fqsen": "\\Matscode\\Paystack\\Traits\\ResourcePath\u003A\u003AsetBasePath\u0028\u0029",
-            "name": "setBasePath",
-            "summary": "Use\u0020to\u0020set\u0020resource\u0020base\u0020path",
-            "url": "classes/Matscode-Paystack-Traits-ResourcePath.html#method_setBasePath"
+            "fqsen": "\\Matscode\\Paystack\\Utility\\Helpers\u003A\u003AJSONStringToObj\u0028\u0029",
+            "name": "JSONStringToObj",
+            "summary": "Parse\u0020response\u0020PSR7\u0020stream\u0020to\u0020Obj",
+            "url": "classes/Matscode-Paystack-Utility-Helpers.html#method_JSONStringToObj"
         },                {
-            "fqsen": "\\Matscode\\Paystack\\Traits\\ResourcePath\u003A\u003AgetBasePath\u0028\u0029",
-            "name": "getBasePath",
-            "summary": "Get\u0020resource\u0020base\u0020path",
-            "url": "classes/Matscode-Paystack-Traits-ResourcePath.html#method_getBasePath"
-        },                {
-            "fqsen": "\\Matscode\\Paystack\\Traits\\ResourcePath\u003A\u003AmakePath\u0028\u0029",
-            "name": "makePath",
-            "summary": "Gets\u0020the\u0020constructed\u0020path\u0020prepended\u0020with\u0020the\u0020base\u0020path",
-            "url": "classes/Matscode-Paystack-Traits-ResourcePath.html#method_makePath"
-        },                {
-            "fqsen": "\\Matscode\\Paystack\\Traits\\ResourcePath\u003A\u003AcleanPath\u0028\u0029",
-            "name": "cleanPath",
-            "summary": "Trim\u0020possible\u0020redundant\u0020slash\u0020and\u0020add\u0020one\u0020at\u0020the\u0020end",
-            "url": "classes/Matscode-Paystack-Traits-ResourcePath.html#method_cleanPath"
-        },                {
-            "fqsen": "\\Matscode\\Paystack\\Traits\\ResourcePath\u003A\u003A\u0024basePath",
-            "name": "basePath",
-            "summary": "",
-            "url": "classes/Matscode-Paystack-Traits-ResourcePath.html#property_basePath"
-        },                {
-            "fqsen": "\\Matscode\\Paystack\\Traits\\ResourcePath\u003A\u003A\u0024path",
-            "name": "path",
-            "summary": "",
-            "url": "classes/Matscode-Paystack-Traits-ResourcePath.html#property_path"
-        },                {
-            "fqsen": "\\Matscode\\Paystack\\Utility\\Debug",
-            "name": "Debug",
-            "summary": "",
-            "url": "classes/Matscode-Paystack-Utility-Debug.html"
-        },                {
-            "fqsen": "\\Matscode\\Paystack\\Utility\\Debug\u003A\u003AprintStr\u0028\u0029",
-            "name": "printStr",
-            "summary": "",
-            "url": "classes/Matscode-Paystack-Utility-Debug.html#method_printStr"
-        },                {
-            "fqsen": "\\Matscode\\Paystack\\Utility\\Debug\u003A\u003Aprint_r\u0028\u0029",
-            "name": "print_r",
-            "summary": "",
-            "url": "classes/Matscode-Paystack-Utility-Debug.html#method_print_r"
-        },                {
-            "fqsen": "\\Matscode\\Paystack\\Utility\\Debug\u003A\u003Avar_dump\u0028\u0029",
-            "name": "var_dump",
-            "summary": "",
-            "url": "classes/Matscode-Paystack-Utility-Debug.html#method_var_dump"
-        },                {
-            "fqsen": "\\Matscode\\Paystack\\Utility\\Debug\u003A\u003A\u0024openTag",
-            "name": "openTag",
-            "summary": "",
-            "url": "classes/Matscode-Paystack-Utility-Debug.html#property_openTag"
-        },                {
-            "fqsen": "\\Matscode\\Paystack\\Utility\\Debug\u003A\u003A\u0024closeTag",
-            "name": "closeTag",
-            "summary": "",
-            "url": "classes/Matscode-Paystack-Utility-Debug.html#property_closeTag"
+            "fqsen": "\\Matscode\\Paystack\\Utility\\Helpers\u003A\u003AparseJSON\u0028\u0029",
+            "name": "parseJSON",
+            "summary": "Parse\u0020JSON\u0020string\u0020to\u0020Object",
+            "url": "classes/Matscode-Paystack-Utility-Helpers.html#method_parseJSON"
         },                {
             "fqsen": "\\Matscode\\Paystack\\Utility\\HTTP\\HTTPClient",
             "name": "HTTPClient",
@@ -221,16 +171,6 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Matscode-Paystack-Utility-HTTP-Request.html"
         },                {
-            "fqsen": "\\Matscode\\Paystack\\Utility\\Http",
-            "name": "Http",
-            "summary": "",
-            "url": "classes/Matscode-Paystack-Utility-Http.html"
-        },                {
-            "fqsen": "\\Matscode\\Paystack\\Utility\\Http\u003A\u003Aredirect\u0028\u0029",
-            "name": "redirect",
-            "summary": "",
-            "url": "classes/Matscode-Paystack-Utility-Http.html#method_redirect"
-        },                {
             "fqsen": "\\Matscode\\Paystack\\Utility\\Text",
             "name": "Text",
             "summary": "",
@@ -246,41 +186,6 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Matscode-Paystack-Utility-Text.html#method_removeSlashes"
         },                {
-            "fqsen": "\\Matscode\\Paystack\\Exceptions\\InvalidArgumentException",
-            "name": "InvalidArgumentException",
-            "summary": "",
-            "url": "classes/Matscode-Paystack-Exceptions-InvalidArgumentException.html"
-        },                {
-            "fqsen": "\\Matscode\\Paystack\\Exceptions\\JsonException",
-            "name": "JsonException",
-            "summary": "",
-            "url": "classes/Matscode-Paystack-Exceptions-JsonException.html"
-        },                {
-            "fqsen": "\\Matscode\\Paystack\\Utility\\Helpers",
-            "name": "Helpers",
-            "summary": "",
-            "url": "classes/Matscode-Paystack-Utility-Helpers.html"
-        },                {
-            "fqsen": "\\Matscode\\Paystack\\Utility\\Helpers\u003A\u003AstreamToString\u0028\u0029",
-            "name": "streamToString",
-            "summary": "Convert\u0020PSR7\u0020Stream\u0020to\u0020string",
-            "url": "classes/Matscode-Paystack-Utility-Helpers.html#method_streamToString"
-        },                {
-            "fqsen": "\\Matscode\\Paystack\\Utility\\Helpers\u003A\u003AJSONStreamToObj\u0028\u0029",
-            "name": "JSONStreamToObj",
-            "summary": "Parse\u0020response\u0020PSR7\u0020stream\u0020to\u0020Obj",
-            "url": "classes/Matscode-Paystack-Utility-Helpers.html#method_JSONStreamToObj"
-        },                {
-            "fqsen": "\\Matscode\\Paystack\\Utility\\Helpers\u003A\u003AparseJSON\u0028\u0029",
-            "name": "parseJSON",
-            "summary": "Parse\u0020JSON\u0020string\u0020to\u0020Object",
-            "url": "classes/Matscode-Paystack-Utility-Helpers.html#method_parseJSON"
-        },                {
-            "fqsen": "\\Matscode\\Paystack\\Utility\\Helpers\u003A\u003AresponseToObj\u0028\u0029",
-            "name": "responseToObj",
-            "summary": "Parse\u0020PSR7\u0020Response\u0020to\u0020Obj",
-            "url": "classes/Matscode-Paystack-Utility-Helpers.html#method_responseToObj"
-        },                {
             "fqsen": "\\",
             "name": "\\",
             "summary": "",
@@ -290,11 +195,6 @@ Search.appendIndex(
             "name": "Exceptions",
             "summary": "",
             "url": "namespaces/matscode-paystack-exceptions.html"
-        },                {
-            "fqsen": "\\Matscode\\Paystack\\Interfaces",
-            "name": "Interfaces",
-            "summary": "",
-            "url": "namespaces/matscode-paystack-interfaces.html"
         },                {
             "fqsen": "\\Matscode\\Paystack",
             "name": "Paystack",
@@ -306,20 +206,10 @@ Search.appendIndex(
             "summary": "",
             "url": "namespaces/matscode.html"
         },                {
-            "fqsen": "\\Matscode\\Paystack\\Providers",
-            "name": "Providers",
-            "summary": "",
-            "url": "namespaces/matscode-paystack-providers.html"
-        },                {
             "fqsen": "\\Matscode\\Paystack\\Resources",
             "name": "Resources",
             "summary": "",
             "url": "namespaces/matscode-paystack-resources.html"
-        },                {
-            "fqsen": "\\Matscode\\Paystack\\Traits",
-            "name": "Traits",
-            "summary": "",
-            "url": "namespaces/matscode-paystack-traits.html"
         },                {
             "fqsen": "\\Matscode\\Paystack\\Utility",
             "name": "Utility",

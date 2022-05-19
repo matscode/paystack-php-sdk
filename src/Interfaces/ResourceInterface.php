@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Matscode\Paystack\Interfaces;
-
 
 use Matscode\Paystack\Utility\HTTP\HTTPClient;
 

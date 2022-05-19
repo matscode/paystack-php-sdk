@@ -1,8 +1,4 @@
 <?php
-/**
- * @package Paystack\Utility
- */
-
 namespace Matscode\Paystack\Utility;
 
 use Matscode\Paystack\Exceptions\JsonException;

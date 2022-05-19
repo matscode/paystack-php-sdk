@@ -1,10 +1,6 @@
 <?php
-/**
- * @package Paystack\Traits
- */
 
 namespace Matscode\Paystack\Traits;
-
 
 trait ResourcePath
 {

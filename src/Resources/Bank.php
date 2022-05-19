@@ -3,8 +3,6 @@
 namespace Matscode\Paystack\Resources;
 
 use GuzzleHttp\Exception\GuzzleException;
-use GuzzleHttp\Psr7;
-use GuzzleHttp\Exception\ClientException;
 use Matscode\Paystack\Exceptions\JsonException;
 use Matscode\Paystack\Interfaces\ResourceInterface;
 use Matscode\Paystack\Traits\ResourcePath;

@@ -1,11 +1,4 @@
 <?php
-/**
- * Class for Transaction Resource
- *
- * @package        Paystack\Resources\Transaction
- * @author         Michael Akanji <matscode@gmail.com>
- *
- */
 
 namespace Matscode\Paystack\Resources;
 
