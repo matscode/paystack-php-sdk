@@ -5,20 +5,19 @@
 - Bank (List, Resolve account)
 
 
-### Roadmap
+### Resource roadmap
+More resources would be added in time
 - `Customers`
 - `Plans`
 - `Subscription`
 - `Transfers`
-- `Charges`
 - `others...`
 
-This package is for communicating with [Paystack API](https://paystack.com/)
+This SDK communicates with [Paystack API](https://paystack.com/)
 
 Development is actively ongoing while releases are Stable.
 <br>
-If you find a BUG/Security Issue, do be kind to open an issue or email [me:matscode](mailto:matscode@gmail.com).
-
+If you find a BUG/Security Issue, do be kind to open an issue or email [Me](mailto:matscode@gmail.com).
 
 ## Requirements
  - GuzzleHttp
@@ -68,11 +67,11 @@ $response = $Paystack->trasaction
 ```
 Now do a redirect to payment page (using authorization_url)
 <br>
-NOTE: Recommended to check if authorizationUrl is set, and save your Transaction reference code. useful to verify Transaction status
+Recommended to check if `authorization_url` is set, and save your transaction reference code. useful to verify Transaction status
 
 ``` php
 // recommend to save Transaction reference in database and do a redirect
-header('Location: ' . $response->data->authorization_url); 
+header('Location: ' . $response->data->authorization_url);
 ```
 
 #### Verifying Transaction
