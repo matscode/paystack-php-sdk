@@ -1,7 +1,7 @@
 # Paystack PHP SDK
 [API Doc]( https://matscode.github.io/paystack-php-sdk ) | [Demo](https://github.com/matscode/paystack-php-sdk-sandbox)
 
-Visit [matscode/paystack](https://github.com/matscode/paystack) for v1.9.1 of this SDK
+Visit [matscode/paystack](https://github.com/matscode/paystack) for `v1.9.1` and below of this SDK
 
 ### Available resources
 - Transaction (`Initialize`, `List`, `Verify`)
