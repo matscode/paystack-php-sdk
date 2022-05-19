@@ -39,7 +39,7 @@ require_once __DIR__ . "/vendor/autoload.php";
     require_once __DIR__ . "/vendor/autoload.php";
     ```
 
-### Initialize Paystack
+## Initialize Paystack SDK
 ``` php
 use Matscode\Paystack\Paystack;
 
