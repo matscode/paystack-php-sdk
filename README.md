@@ -1,9 +1,9 @@
 # Paystack PHP SDK
+[SDK Demo](https://github.com/matscode/paystack-php-sdk-sandbox)
 
 ### Available resources
-- Transaction (Initialize, List, Verify)
-- Bank (List, Resolve account)
-
+- Transaction (`Initialize`, `List`, `Verify`)
+- Bank (`List`, `Resolve account`)
 
 ### Resource roadmap
 More resources would be added in time
@@ -13,7 +13,7 @@ More resources would be added in time
 - `Transfers`
 - `others...`
 
-This SDK communicates with [Paystack API](https://paystack.com/)
+This SDK communicates with [Paystack API](https://paystack.com/). You need to have a paystack merchant account and paystack secret key to use this SDK.
 
 Development is actively ongoing while releases are Stable.
 <br>
@@ -61,8 +61,8 @@ OR
 // Set data to post using this method
 $response = $Paystack->trasaction
             ->setCallbackUrl('https://www.app.local/paystack/transaction/verify')
-            ->setEmail( 'matscode@gmail.com' )
-            ->setAmount( 75000 ) // amount is treated in Naira while using this setAmount() method
+            ->setEmail('customer.email@gmail.com')
+            ->setAmount(75000) // amount is treated in Naira while using this setAmount() method
             ->initialize();
 ```
 Now do a redirect to payment page (using authorization_url)
