@@ -1,5 +1,5 @@
 # Paystack PHP SDK
-[SDK Demo](https://github.com/matscode/paystack-php-sdk-sandbox)
+[SDK API]( https://matscode.github.io/paystack-php-sdk ) | [SDK Demo](https://github.com/matscode/paystack-php-sdk-sandbox)
 
 ### Available resources
 - Transaction (`Initialize`, `List`, `Verify`)
@@ -100,5 +100,5 @@ $response = $Paystack->bank->resolve($bank_code, $account_number);
 ```
 
 
-## Contact/Portfolio
+### Contact
 [Personal Home](https://inndex.page/matscode) | [Email](mailto:matscode@gmail.com)
