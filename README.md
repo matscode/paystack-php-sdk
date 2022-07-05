@@ -52,7 +52,7 @@ $Paystack = new Paystack($paystackSecret);
 ## Transaction Resource
 #### Initialize Charge
 ```php
-$response = $Paystack->trasaction->initialize([
+$response = $Paystack->transaction->initialize([
             'email'  => 'customer.email@gmail.com',
             'amount' => 500000, // amount is in kobo
             'callback_url' => 'https://www.app.local/paystack/transaction/verify'
@@ -61,7 +61,7 @@ $response = $Paystack->trasaction->initialize([
 OR 
 ``` php
 // Set data to post using this method
-$response = $Paystack->trasaction
+$response = $Paystack->transaction
             ->setCallbackUrl('https://www.app.local/paystack/transaction/verify')
             ->setEmail('customer.email@gmail.com')
             ->setAmount(75000) // amount is treated in Naira while using this setAmount() method
@@ -79,7 +79,7 @@ header('Location: ' . $response->data->authorization_url);
 #### Verifying Transaction
 ``` php
 $reference_code = $_GET['reference']
-$response = $Paystack->trasaction->verify($reference_code);
+$response = $Paystack->transaction->verify($reference_code);
 ```
 OR
 ``` php
