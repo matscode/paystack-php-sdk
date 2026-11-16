@@ -1,0 +1,101 @@
+---
+sidebar_position: 2
+sidebar_label: 'Plan'
+title: 'Plan Resource - Paystack PHP SDK'
+description: 'Create, list, fetch, and update recurring billing plans using the Paystack PHP SDK.'
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# Plan
+
+Create and manage recurring billing plans via `$paystack->plan`.
+
+## Create a Plan
+
+Define a new billing plan that customers can be subscribed to at fixed intervals.
+
+<Tabs>
+  <TabItem value="php" label="PHP Request" default>
+
+```php
+$response = $paystack->plan->create([
+    'name' => 'Monthly Pro Tier',
+    'interval' => 'monthly',
+    'amount' => 1000000, // NGN 10,000.00 in kobo
+]);
+```
+
+  </TabItem>
+  <TabItem value="json" label="Sample Response">
+
+```json
+{
+  "status": true,
+  "message": "Plan created",
+  "data": {
+    "name": "Monthly Pro Tier",
+    "amount": 1000000,
+    "interval": "monthly",
+    "integration": 463433,
+    "domain": "test",
+    "plan_code": "PLN_gx2wn530m0i3w3m",
+    "send_invoices": true,
+    "send_sms": true,
+    "currency": "NGN",
+    "id": 28
+  }
+}
+```
+
+  </TabItem>
+</Tabs>
+
+| Parameter | Type | Required | Description |
+| :--- | :--- | :--- | :--- |
+| `name` | `string` | Yes | Name of the billing plan. |
+| `amount` | `int` | Yes | Amount to charge in the lowest currency denomination (e.g., kobo). |
+| `interval` | `string` | Yes | Billing frequency: `daily`, `weekly`, `monthly`, `quarterly`, `biannually`, or `annually`. |
+| `description` | `string` | No | Short summary of what the plan covers. |
+| `invoice_limit` | `int` | No | Number of invoices to raise during the subscription lifecycle. |
+
+---
+
+## List Plans
+
+Retrieve all billing plans created on your Paystack integration.
+
+```php
+$response = $paystack->plan->list([
+    'perPage' => 20,
+    'page' => 1,
+]);
+```
+
+---
+
+## Fetch a Plan
+
+Retrieve details of a specific plan using its `plan_code` or numeric `id`.
+
+```php
+$response = $paystack->plan->fetch('PLN_gx2wn530m0i3w3m');
+```
+
+---
+
+## Update a Plan
+
+Modify the details of an existing billing plan using its `plan_code` or numeric `id`.
+
+```php
+$response = $paystack->plan->update('PLN_gx2wn530m0i3w3m', [
+    'name' => 'Updated Pro Tier',
+    'amount' => 1200000,
+]);
+```
+
+:::info[Existing Plan Subscribers]
+Updating a plan's `amount` only applies to new subscriptions created after the update. Existing active subscriptions continue billing at their original subscribed rate.
+:::

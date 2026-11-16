@@ -1,0 +1,64 @@
+---
+slug: /intro
+sidebar_position: 1
+sidebar_label: 'Getting Started'
+title: 'Getting Started - Paystack PHP SDK'
+description: 'Install and initialize the Paystack PHP SDK in your project.'
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# Getting Started
+
+A clean, lightweight, developer-friendly PHP wrapper for the Paystack API.
+
+## Installation
+
+<Tabs>
+  <TabItem value="composer" label="Composer (Recommended)" default>
+
+```bash
+composer require matscode/paystack-php-sdk
+```
+
+  </TabItem>
+  <TabItem value="composer-json" label="composer.json">
+
+```json
+{
+  "require": {
+    "matscode/paystack-php-sdk": "^1.0"
+  }
+}
+```
+
+  </TabItem>
+</Tabs>
+
+## Initialization
+
+Instantiate the `Paystack` client using your secret key from the Paystack Dashboard:
+
+```php
+use Matscode\Paystack\Paystack;
+
+$paystack = new Paystack('sk_test_your_secret_key');
+```
+
+:::danger[Keep Your Secret Key Safe]
+Never expose your Paystack secret key (`sk_live_...`) in frontend client-side code or public repositories. Always load it from environment variables (e.g., `$_ENV['PAYSTACK_SECRET_KEY']`) on your backend server. :::  ## SDK Architecture  Resources are accessed directly as properties on the `$paystack` instance, mirroring the SDK's directory and namespace layout
+:::
+
+| Category | Property Access | Available Methods |
+| :--- | :--- | :--- |
+| **Transaction** | `$paystack->transaction` | `initialize()`, `verify()`, `list()`, `fetch()` |
+| **Plan** | `$paystack->plan` | `create()`, `list()`, `fetch()`, `update()` |
+| **Bank** | `$paystack->miscellaneous->bank` | `list()`, `resolve()`, `validate()` |
+| **Subscription** | `$paystack->subscription` | `create()`, `list()`, `fetch()`, `enable()`, `disable()` |
+| **Card** | `$paystack->miscellaneous->card` | `resolveInfo()` |
+| **Country** | `$paystack->miscellaneous->country` | `list()` |
+
+:::tip[Currency Denominations]
+Paystack expects all transaction and plan amounts in the **lowest currency denomination** (for example, kobo for NGN or pesewas for GHS). Multiply your base amount by `100` before passing it to the SDK.
+:::

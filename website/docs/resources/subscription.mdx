@@ -1,0 +1,120 @@
+---
+sidebar_position: 3
+sidebar_label: 'Subscription'
+title: 'Subscription Resource - Paystack PHP SDK'
+description: 'Create, list, fetch, enable, and disable customer subscriptions using the Paystack PHP SDK.'
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# Subscription
+
+Manage customer subscriptions to your recurring billing plans via `$paystack->subscription`.
+
+## Create a Subscription
+
+Subscribe an existing customer to a billing plan.
+
+<Tabs>
+  <TabItem value="php" label="PHP Request" default>
+
+```php
+$response = $paystack->subscription->create([
+    'customer' => 'CUS_xnxdt6s1zg1f4nx',
+    'plan' => 'PLN_gx2wn530m0i3w3m',
+]);
+```
+
+  </TabItem>
+  <TabItem value="json" label="Sample Response">
+
+```json
+{
+  "status": true,
+  "message": "Subscription successfully created",
+  "data": {
+    "customer": 1173,
+    "plan": 28,
+    "integration": 463433,
+    "domain": "test",
+    "start": 1459296064,
+    "status": "active",
+    "quantity": 1,
+    "amount": 1000000,
+    "subscription_code": "SUB_vsyqdmlzble3uii",
+    "email_token": "d7gofp6yppn3qz7",
+    "id": 9
+  }
+}
+```
+
+  </TabItem>
+</Tabs>
+
+:::info[Authorization Requirement]
+The customer must already have a reusable card authorization on your integration before you can create a subscription directly. If multiple authorizations exist, you can pass an optional `authorization` code in the payload.
+:::
+
+---
+
+## List Subscriptions
+
+Retrieve a paginated list of subscriptions on your integration.
+
+```php
+$response = $paystack->subscription->list([
+    'perPage' => 20,
+    'page' => 1,
+]);
+```
+
+| Parameter | Type | Description |
+| :--- | :--- | :--- |
+| `perPage` | `int` | Number of records to retrieve per page (default: `50`). |
+| `page` | `int` | Page number to retrieve (default: `1`). |
+| `customer` | `int` | Filter subscriptions by a specific customer ID. |
+| `plan` | `int` | Filter subscriptions by a specific plan ID. |
+
+---
+
+## Fetch a Subscription
+
+Retrieve full details of a specific subscription using its `subscription_code` or numeric `id`.
+
+```php
+$response = $paystack->subscription->fetch('SUB_vsyqdmlzble3uii');
+```
+
+---
+
+## Enable or Disable a Subscription
+
+Activate a paused subscription or cancel an active one using its `subscription_code` and `email_token`.
+
+<Tabs>
+  <TabItem value="enable" label="Enable Subscription" default>
+
+```php
+$response = $paystack->subscription->enable([
+    'code' => 'SUB_vsyqdmlzble3uii',
+    'token' => 'd7gofp6yppn3qz7',
+]);
+```
+
+  </TabItem>
+  <TabItem value="disable" label="Disable Subscription">
+
+```php
+$response = $paystack->subscription->disable([
+    'code' => 'SUB_vsyqdmlzble3uii',
+    'token' => 'd7gofp6yppn3qz7',
+]);
+```
+
+  </TabItem>
+</Tabs>
+
+:::tip[Store the Email Token]
+Paystack returns `email_token` when you create or fetch a subscription. Save this token alongside `subscription_code` in your database so your backend can programmatically enable or cancel subscriptions without manual dashboard intervention.
+:::

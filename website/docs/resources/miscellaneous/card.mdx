@@ -1,0 +1,55 @@
+---
+sidebar_position: 2
+sidebar_label: 'Card'
+title: 'Card Resource - Paystack PHP SDK'
+description: 'Resolve card BIN metadata including card brand, type, issuing bank, and country using the Paystack PHP SDK.'
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# Card
+
+Inspect card metadata and issuer details via `$paystack->miscellaneous->card`.
+
+## Resolve Card BIN
+
+Retrieve card brand, card type (debit or credit), issuing bank, and country metadata from the first 6 digits (Bank Identification Number) of a payment card.
+
+<Tabs>
+  <TabItem value="php" label="PHP Request" default>
+
+```php
+$response = $paystack->miscellaneous->card->resolveInfo('539983');
+```
+
+  </TabItem>
+  <TabItem value="json" label="Sample Response">
+
+```json
+{
+  "status": true,
+  "message": "Bin resolved",
+  "data": {
+    "bin": "539983",
+    "brand": "Mastercard",
+    "sub_brand": "",
+    "country_code": "NG",
+    "country_name": "Nigeria",
+    "card_type": "DEBIT",
+    "bank": "Guaranty Trust Bank",
+    "linked_bank_id": 9
+  }
+}
+```
+
+  </TabItem>
+</Tabs>
+
+| Parameter | Type | Required | Description |
+| :--- | :--- | :--- | :--- |
+| `$bin` | `string` | Yes | The first 6 digits of the customer's card number. |
+
+:::info[PCI Compliance Note]
+Only pass the first 6 digits (BIN) of the card to `resolveInfo()`. Never collect, transmit, or log full Primary Account Numbers (PAN) or CVV codes on your backend server unless you maintain full PCI-DSS certification.
+:::

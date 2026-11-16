@@ -1,0 +1,68 @@
+/**
+ * Google Sans & Google Sans Code Variable Fonts + Shades of Grey Theme
+ */
+
+:root {
+  /* Typography Variables using Google Sans Variable */
+  --ifm-font-family-base: "Google Sans", -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --ifm-heading-font-family: "Google Sans", -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --ifm-font-family-monospace: "Google Sans Code", SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+  /* Optional: Configure variable axes defaults */
+  font-optical-sizing: auto;
+
+  /* Light Mode Palette (Shades of Grey) */
+  --ifm-color-primary: #475569;
+  --ifm-color-primary-dark: #334155;
+  --ifm-color-primary-darker: #1e293b;
+  --ifm-color-primary-darkest: #0f172a;
+  --ifm-color-primary-light: #64748b;
+  --ifm-color-primary-lighter: #94a3b8;
+  --ifm-color-primary-lightest: #cbd5e1;
+
+  --ifm-background-color: #ffffff;
+  --ifm-background-surface-color: #f8fafc;
+  --ifm-card-background-color: #ffffff;
+  --ifm-navbar-background-color: #ffffff;
+  --ifm-footer-background-color: #0f172a;
+  --ifm-footer-color: #94a3b8;
+  
+  --ifm-code-background: #f1f5f9;
+  --ifm-color-content: #1e293b;
+  --ifm-color-content-secondary: #64748b;
+  --ifm-border-color: #e2e8f0;
+  
+  --docusaurus-highlighted-code-line-background: rgba(0, 0, 0, 0.05);
+}
+
+/* Dark Mode Palette (Shades of Grey) */
+[data-theme='dark'] {
+  --ifm-color-primary: #94a3b8;
+  --ifm-color-primary-dark: #64748b;
+  --ifm-color-primary-darker: #475569;
+  --ifm-color-primary-darkest: #334155;
+  --ifm-color-primary-light: #cbd5e1;
+  --ifm-color-primary-lighter: #e2e8f0;
+  --ifm-color-primary-lightest: #f1f5f9;
+
+  --ifm-background-color: #12151c;
+  --ifm-background-surface-color: #181c25;
+  --ifm-card-background-color: #1a1e28;
+  --ifm-navbar-background-color: #151922;
+  --ifm-footer-background-color: #0d0f14;
+  --ifm-footer-color: #94a3b8;
+  
+  --ifm-code-background: #1e232f;
+  --ifm-toc-border-color: #2a3140;
+  --ifm-color-content: #cbd5e1;
+  --ifm-color-content-secondary: #94a3b8;
+  --ifm-border-color: #2a3140;
+  
+  --docusaurus-highlighted-code-line-background: rgba(255, 255, 255, 0.05);
+}
+
+/* Optional variable font settings for code blocks */
+code, pre, .prism-code {
+  font-family: "Google Sans Code", monospace;
+  font-variation-settings: "MONO" 1;
+}

@@ -1,0 +1,118 @@
+---
+sidebar_position: 1
+sidebar_label: 'Transaction'
+title: 'Transaction Resource - Paystack PHP SDK'
+description: 'Initialize payments, verify transaction statuses, and retrieve transaction history using the Paystack PHP SDK.'
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# Transaction
+
+Accept payments, verify transaction statuses, and retrieve transaction history via `$paystack->transaction`.
+
+## Initialize a Transaction
+
+Start a payment session and retrieve an authorization URL to redirect your customer to Paystack's checkout.
+
+<Tabs>
+  <TabItem value="php" label="PHP Request" default>
+
+```php
+$response =$paystack->transaction->initialize([
+    'email' => 'customer@example.com',
+    'amount' => 500000, // NGN 5,000.00 in kobo
+    'callback_url' => 'https://example.com/payment/callback',
+]);
+```
+
+  </TabItem>
+  <TabItem value="json" label="Sample Response">
+
+```json
+{
+  "status": true,
+  "message": "Authorization URL created",
+  "data": {
+    "authorization_url": "https://checkout.paystack.com/0peioxfhpn",
+    "access_code": "0peioxfhpn",
+    "reference": "7PVGX8MEk85tgeEpVDtD"
+  }
+}
+```
+
+  </TabItem>
+</Tabs>
+
+:::info[Amount Calculation]
+The `amount` parameter must be passed in the **lowest currency denomination** (kobo for NGN, pesewas for GHS, cents for USD/ZAR). For example, pass `500000` for NGN 5,000.00.
+:::
+
+---
+
+## Verify a Transaction
+
+Confirm the final status of a transaction using its unique reference after the customer completes checkout or via webhook.
+
+<Tabs>
+  <TabItem value="php" label="PHP Request" default>
+
+```php
+$response =$paystack->transaction->verify('7PVGX8MEk85tgeEpVDtD');
+```
+
+  </TabItem>
+  <TabItem value="json" label="Sample Response">
+
+```json
+{
+  "status": true,
+  "message": "Verification successful",
+  "data": {
+    "id": 2009945086,
+    "status": "success",
+    "reference": "7PVGX8MEk85tgeEpVDtD",
+    "amount": 500000,
+    "currency": "NGN",
+    "channel": "card"
+  }
+}
+```
+
+  </TabItem>
+</Tabs>
+
+:::warning[Always Verify Server-Side]
+Never rely solely on frontend redirect callbacks to fulfill orders. Always call `$paystack->transaction->verify($reference)` on your server and check that `$response->data->status === 'success'` and the returned `amount` matches your expected order total.
+:::
+
+---
+
+## List Transactions
+
+Retrieve a paginated list of transactions carried out on your integration.
+
+```php
+$response =$paystack->transaction->list([
+    'perPage' => 20,
+    'page' => 1,
+]);
+```
+
+| Parameter | Type | Description |
+| :--- | :--- | :--- |
+| `perPage` | `int` | Number of records to retrieve per page (default: `50`). |
+| `page` | `int` | Page number to retrieve (default: `1`). |
+| `customer` | `int` | Filter transactions by a specific customer ID. |
+| `status` | `string` | Filter by transaction status (`failed`, `success`, `abandoned`). |
+
+---
+
+## Fetch a Single Transaction
+
+Get full details of a specific transaction using its numeric Paystack transaction ID.
+
+```php
+$response =$paystack->transaction->fetch(2009945086);
+```

@@ -1,0 +1,55 @@
+---
+sidebar_position: 3
+sidebar_label: 'Country'
+title: 'Country Resource - Paystack PHP SDK'
+description: 'Retrieve countries supported by Paystack and their respective currencies and configurations using the Paystack PHP SDK.'
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# Country
+
+Retrieve countries supported by Paystack along with their supported currencies, mobile money configurations, and integration features via `$paystack->miscellaneous->country`.
+
+## List Supported Countries
+
+Get a comprehensive list of all countries where Paystack operates or supports cross-border collections.
+
+<Tabs>
+  <TabItem value="php" label="PHP Request" default>
+
+```php
+$response =$paystack->miscellaneous->country->list();
+```
+
+  </TabItem>
+  <TabItem value="json" label="Sample Response">
+
+```json
+{
+  "status": true,
+  "message": "Countries retrieved",
+  "data": [
+    {
+      "id": 1,
+      "name": "Nigeria",
+      "iso_code": "NGA",
+      "default_currency_code": "NGN",
+      
+      "currencies": [
+        "NGN",
+        "USD"
+      ],
+      "enabled_for_verification": true
+    }
+  ]
+}
+```
+
+  </TabItem>
+</Tabs>
+
+:::tip[Cross-Border Integrations]
+Use the country and currency metadata returned by this endpoint to dynamically configure supported checkout currencies and bank resolution options when your platform operates across multiple African markets.
+:::
