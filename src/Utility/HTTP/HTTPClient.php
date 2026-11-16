@@ -3,25 +3,39 @@
 namespace Matscode\Paystack\Utility\HTTP;
 
 use GuzzleHttp\Client;
+use Matscode\Paystack\Utility\Helpers;
+use stdClass;
 
 class HTTPClient extends Client
 {
-
-    private string $apiBaseUrl = 'https://api.paystack.co/'; // with trailing slash
+    private string $apiBaseUrl = 'https://api.paystack.co/';
 
     public function __construct(string $secretKey)
     {
         parent::__construct([
             'base_uri' => $this->apiBaseUrl,
             'headers' => [
-                'Content-Type'     => 'application/json',
-                'Authorization'     => 'Bearer ' . $secretKey,
+                'Content-Type'  => 'application/json',
+                'Authorization' => 'Bearer ' . $secretKey,
             ]
         ]);
     }
 
-    public function requestFactory(array $messageComponent)
+    public function postJson(string $uri, array $options = []): stdClass
     {
-        // TODO: Justify the need for this function before implementing...
+        $response = parent::post($uri, $options);
+        return Helpers::JSONStringToObj($response->getBody());
+    }
+
+    public function getJson(string $uri, array $options = []): stdClass
+    {
+        $response = parent::get($uri, $options);
+        return Helpers::JSONStringToObj($response->getBody());
+    }
+
+    public function putJson(string $uri, array $options = []): stdClass
+    {
+        $response = parent::put($uri, $options);
+        return Helpers::JSONStringToObj($response->getBody());
     }
 }
