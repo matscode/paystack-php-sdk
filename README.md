@@ -1,5 +1,6 @@
-# Paystack PHP SDK
-[Documentation]( https://matscode.github.io/paystack-php-sdk )
+# Paystack PHP SDK  &nbsp;&nbsp;  [![aislop](https://badges.scanaislop.com/score/matscode/paystack-php-sdk.svg)](https://scanaislop.com/matscode/paystack-php-sdk)
+
+### [Full Documentation]( https://matscode.github.io/paystack-php-sdk )
 
 For version 1 of this SDK, visit [matscode/paystack](https://github.com/matscode/paystack).
 
