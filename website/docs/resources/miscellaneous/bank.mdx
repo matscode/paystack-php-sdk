@@ -1,0 +1,147 @@
+---
+sidebar_position: 1
+sidebar_label: 'Bank'
+title: 'Bank Resource - Paystack PHP SDK'
+description: 'List supported banks, resolve bank account numbers, and validate bank accounts using the Paystack PHP SDK.'
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# Bank
+
+List supported banks, resolve account numbers, and validate customer bank account details via `$paystack->miscellaneous->bank`.
+
+## List Supported Banks
+
+Retrieve a list of all banks and financial institutions supported by Paystack for a given country.
+
+<Tabs>
+  <TabItem value="php" label="PHP Request" default>
+
+```php
+$response = $paystack->miscellaneous->bank->list([
+    'country' => 'nigeria',
+]);
+```
+
+  </TabItem>
+  <TabItem value="json" label="Sample Response">
+
+```json
+{
+  "status": true,
+  "message": "Banks retrieved",
+  "data": [
+    {
+      "name": "Access Bank",
+      "slug": "access-bank",
+      "code": "044",
+      "longcode": "044150149",
+      "gateway": "emandate",
+      "pay_with_bank": false,
+      "active": true,
+      "is_deleted": false,
+      "country": "Nigeria",
+      "currency": "NGN",
+      "type": "nuban",
+      "id": 1
+    }
+  ]
+}
+```
+
+  </TabItem>
+</Tabs>
+
+| Parameter | Type | Description |
+| :--- | :--- | :--- |
+| `country` | `string` | Country name to filter banks (e.g., `nigeria`, `ghana`, `south africa`, `kenya`). |
+| `use_cursor` | `bool` | Set to `true` to enable cursor-based pagination. |
+| `perPage` | `int` | Number of bank records to retrieve per page (default: `50`). |
+
+---
+
+## Resolve Account Number
+
+Verify that an account number belongs to a valid bank account and retrieve the registered account name.
+
+<Tabs>
+  <TabItem value="php" label="PHP Request" default>
+
+```php
+$response = $paystack->miscellaneous->bank->resolve([
+    'account_number' => '0123456789',
+    'bank_code' => '058',
+]);
+```
+
+  </TabItem>
+  <TabItem value="json" label="Sample Response">
+
+```json
+{
+  "status": true,
+  "message": "Account number resolved",
+  "data": {
+    "account_number": "0123456789",
+    "account_name": "JOHN DOE",
+    "bank_id": 9
+  }
+}
+```
+
+  </TabItem>
+</Tabs>
+
+:::tip[Test Mode Behavior]
+In Paystack's test environment (`sk_test_...`), account resolution rate-limits live bank lookups. Use Paystack's test bank code `001` with any 10-digit account number during local development to avoid hitting daily test resolution caps.
+:::
+
+---
+
+## Validate Bank Account
+
+Confirm the authenticity of a customer's bank account against government-issued identity records (supported for South African accounts).
+
+<Tabs>
+  <TabItem value="php" label="PHP Request" default>
+
+```php
+$response = $paystack->miscellaneous->bank->validate([
+    'account_name' => 'John Doe',
+    'account_number' => '0123456789',
+    'account_type' => 'personal',
+    'bank_code' => '632005',
+    'country_code' => 'ZA',
+    'document_type' => 'identityNumber',
+    'document_number' => '1234567890123',
+]);
+```
+
+  </TabItem>
+  <TabItem value="json" label="Sample Response">
+
+```json
+{
+  "status": true,
+  "message": "Personal Account Verification attempted",
+  "data": {
+    "verified": true,
+    "verificationMessage": "Account is verified"
+  }
+}
+```
+
+  </TabItem>
+</Tabs>
+
+| Parameter | Type | Required | Description |
+| :--- | :--- | :--- | :--- |
+| `account_name` | `string` | Yes | Customer's full legal name on the account. |
+| `account_number` | `string` | Yes | Customer's bank account number. |
+| `account_type` | `string` | Yes | Account classification: `personal` or `business`. |
+| `bank_code` | `string` | Yes | Bank code from the supported banks list. |
+| `country_code` | `string` | Yes | Two-letter ISO country code (e.g., `ZA`). |
+| `document_type` | `string` | Yes | Identity document type: `identityNumber`, `passportNumber`, or `businessRegistrationNumber`. |
+| `document_number` | `string` | Yes | Customer's identity or registration number. |

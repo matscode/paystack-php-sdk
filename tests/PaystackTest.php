@@ -1,4 +1,5 @@
 <?php
+namespace Matscode\Paystack\Tests;
 
 use Matscode\Paystack\Paystack;
 use PHPUnit\Framework\TestCase;

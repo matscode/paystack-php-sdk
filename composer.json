@@ -5,8 +5,8 @@
   "authors": [
     {
       "name": "Michael Akanji",
-      "email": "matscode@gmail.com",
-      "homepage": "https://inndex.page/matscode"
+      "email": "matscode@users.noreply.github.com",
+      "homepage": "https://matsco.de"
     }
   ],
   "keywords": [
@@ -35,11 +35,11 @@
     "sort-packages": true
   },
   "require": {
-    "guzzlehttp/guzzle": "^7.0",
+    "guzzlehttp/guzzle": "^7.0 || ^8.0",
     "ext-json": "*"
   },
   "require-dev": {
-    "mockery/mockery": "1.4.x-dev",
+    "mockery/mockery": "^1.4",
     "phpunit/phpunit": "^9",
     "squizlabs/php_codesniffer": "3.*"
   }

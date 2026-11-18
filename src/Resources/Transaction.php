@@ -5,35 +5,28 @@ namespace Matscode\Paystack\Resources;
 use GuzzleHttp\Exception\GuzzleException;
 use Matscode\Paystack\Exceptions\InvalidArgumentException;
 use Matscode\Paystack\Exceptions\JsonException;
-use Matscode\Paystack\Interfaces\ResourceInterface;
-use Matscode\Paystack\Traits\ResourcePath;
-use Matscode\Paystack\Utility\Helpers;
 use Matscode\Paystack\Utility\HTTP\HTTPClient;
 use Matscode\Paystack\Utility\Text;
 use stdClass;
 
-class Transaction implements ResourceInterface
+class Transaction extends BaseResource
 {
-    use ResourcePath;
-
-    protected $httpClient, $callbackUrl, $data;
+    protected $callbackUrl, $data = [];
 
     /**
      * @throws \Exception
      */
     public function __construct(HTTPClient $HTTPClient)
     {
-        $this->setBasePath('transaction');
+        parent::__construct($HTTPClient);
         $this->setReference('REF-' . ($this->data['reference'] ?? Text::uniqueStr()));
-
-        $this->httpClient = $HTTPClient;
     }
 
     /**
      * This method must be called to request for payment. which return an initial transaction obj
      *
      * @link https://paystack.com/docs/api/#transaction-initialize
-     *
+     * 
      * @param array $data
      * @return stdClass
      * @throws GuzzleException
@@ -54,32 +47,30 @@ class Transaction implements ResourceInterface
 
         $this->data = []; // empty the bag
 
-        return Helpers::JSONStringToObj($this->httpClient->post($this->makePath('initialize'), [
+        return $this->httpClient->postJson($this->path('initialize'), [
             'json' => $data
-        ])->getBody());
+        ]);
     }
 
     /**
      * Is used to Check if a transaction is successful and return the transaction object data
      *
      * @link https://paystack.com/docs/api/#transaction-verify
-     *
+     * 
      * @param string $referenceCode
-     *
      * @return StdClass
      * @throws GuzzleException
      * @throws JsonException
      */
     public function verify(string $referenceCode): StdClass
     {
-        return Helpers::JSONStringToObj($this->httpClient->get($this->makePath('verify/' . $referenceCode))->getBody());
+        return $this->httpClient->getJson($this->path('verify/' . $referenceCode));
     }
 
     /**
      * Like verify(), but it only checks to see if a transactions is successful returning boolean
-     *
+     * 
      * @param string $reference
-     *
      * @return bool
      * @throws GuzzleException
      * @throws JsonException
@@ -106,7 +97,7 @@ class Transaction implements ResourceInterface
      * Add metadata to the request data
      *
      * Method can be called chained more than once. Last call with repeated property overwrites the former
-     *
+     * 
      * @param array $metadata
      * @return $this
      */
@@ -119,7 +110,7 @@ class Transaction implements ResourceInterface
 
     /**
      * Ignore setting amount when setting plan and vice versa. Plan takes precedence
-     *
+     * 
      * @param string $plan
      * @return $this
      */
@@ -134,7 +125,6 @@ class Transaction implements ResourceInterface
 
     /**
      * @param string $email
-     *
      * @return $this
      */
     public function setEmail(string $email): Transaction
@@ -154,9 +144,8 @@ class Transaction implements ResourceInterface
      * Set transaction amount in kobo(NGN) or pesewas(GHS)
      *
      * NOTE: Setting plan overwrites your defined amount
-     *
+     * 
      * @param int $amount
-     *
      * @return $this
      */
     public function setAmount(int $amount): Transaction
@@ -176,7 +165,7 @@ class Transaction implements ResourceInterface
 
     /**
      * Sets the transaction reference code/id
-     *
+     * 
      * @param string $reference
      * @return Transaction
      */
@@ -189,11 +178,9 @@ class Transaction implements ResourceInterface
 
     /**
      * Returns the transaction code/id used
-     *
+     * 
      * @param bool $afterInitialize
-     *
      * @return null
-     *
      */
     public function getReference(bool $afterInitialize = false)
     {
@@ -202,9 +189,8 @@ class Transaction implements ResourceInterface
 
     /**
      * To set callback URL, can be used to override callback URL set on paystack dashboard
-     *
+     * 
      * @param string $callbackUrl
-     *
      * @return $this
      */
     public function setCallbackUrl(string $callbackUrl): Transaction
@@ -218,7 +204,7 @@ class Transaction implements ResourceInterface
      * Get the list of all transactions
      *
      * @link https://paystack.com/docs/api/#transaction-list
-     *
+     * 
      * @param int $numberOfRecords number of record per page
      * @param int $page page number
      * @param array $otherOptions
@@ -228,10 +214,11 @@ class Transaction implements ResourceInterface
      */
     public function list(int $numberOfRecords = 50, int $page = 1, array $otherOptions = []): stdClass
     {
-        return Helpers::JSONStringToObj($this->httpClient->get($this->makePath() . '?' . http_build_query($otherOptions + [
-                    'perPage' => $numberOfRecords,
-                    'page' => $page
-                ]))->getBody());
-    }
+        $query = http_build_query($otherOptions + [
+            'perPage' => $numberOfRecords,
+            'page' => $page
+        ]);
 
+        return $this->httpClient->getJson($this->path() . '?' . $query);
+    }
 }
