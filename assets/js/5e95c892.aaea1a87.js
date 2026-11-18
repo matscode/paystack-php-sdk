@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkpaystack_php_sdk_docs=self.webpackChunkpaystack_php_sdk_docs||[]).push([["668"],{6569(s,e,a){a.r(e),a.d(e,{default:()=>k});var c=a(4848);a(6540);var r=a(4164),p=a(4308),d=a(8287),t=a(2831),u=a(1085);function k(s){return(0,c.jsx)(p.e3,{className:(0,r.A)(d.G.wrapper.docsPages),children:(0,c.jsx)(u.A,{children:(0,t.v)(s.route.routes)})})}}}]);
