@@ -11,7 +11,7 @@ const config: Config = {
   },
 
   url: "https://matscode.github.io",
-  baseUrl: "/paystack-php-sdk/",
+  baseUrl: "/",
 
   organizationName: "matscode",
   projectName: "paystack-php-sdk",
