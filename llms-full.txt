@@ -1,0 +1,593 @@
+# Paystack PHP SDK
+
+> Clean, developer-friendly Paystack API wrapper for PHP
+
+This file contains all documentation content in a single document following the llmstxt.org standard.
+
+## Getting Started - Paystack PHP SDK
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+## Getting Started
+
+A clean, lightweight, developer-friendly PHP wrapper for the Paystack API.
+
+### Installation
+
+**Composer (Recommended)**
+
+```bash
+composer require matscode/paystack-php-sdk
+```
+
+**composer.json**
+
+```json
+{
+  "require": {
+    "matscode/paystack-php-sdk": "^1.0"
+  }
+}
+```
+
+### Initialization
+
+Instantiate the `Paystack` client using your secret key from the Paystack Dashboard:
+
+```php
+use Matscode\Paystack\Paystack;
+
+$paystack = new Paystack('sk_test_your_secret_key');
+```
+
+:::danger[Keep Your Secret Key Safe]
+Never expose your Paystack secret key (`sk_live_...`) in frontend client-side code or public repositories. Always load it from environment variables (e.g., `$_ENV['PAYSTACK_SECRET_KEY']`) on your backend server. :::  ## SDK Architecture  Resources are accessed directly as properties on the `$paystack` instance, mirroring the SDK's directory and namespace layout
+:::
+
+| Category | Property Access | Available Methods |
+| :--- | :--- | :--- |
+| **Transaction** | `$paystack->transaction` | `initialize()`, `verify()`, `list()`, `fetch()` |
+| **Plan** | `$paystack->plan` | `create()`, `list()`, `fetch()`, `update()` |
+| **Bank** | `$paystack->miscellaneous->bank` | `list()`, `resolve()`, `validate()` |
+| **Subscription** | `$paystack->subscription` | `create()`, `list()`, `fetch()`, `enable()`, `disable()` |
+| **Card** | `$paystack->miscellaneous->card` | `resolveInfo()` |
+| **Country** | `$paystack->miscellaneous->country` | `list()` |
+
+:::tip[Currency Denominations]
+Paystack expects all transaction and plan amounts in the **lowest currency denomination** (for example, kobo for NGN or pesewas for GHS). Multiply your base amount by `100` before passing it to the SDK.
+:::
+
+---
+
+## Bank Resource - Paystack PHP SDK
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+## Bank
+
+List supported banks, resolve account numbers, and validate customer bank account details via `$paystack->miscellaneous->bank`.
+
+### List Supported Banks
+
+Retrieve a list of all banks and financial institutions supported by Paystack for a given country.
+
+**PHP Request**
+
+```php
+$response = $paystack->miscellaneous->bank->list([
+    'country' => 'nigeria',
+]);
+```
+
+**Sample Response**
+
+```json
+{
+  "status": true,
+  "message": "Banks retrieved",
+  "data": [
+    {
+      "name": "Access Bank",
+      "slug": "access-bank",
+      "code": "044",
+      "longcode": "044150149",
+      "gateway": "emandate",
+      "pay_with_bank": false,
+      "active": true,
+      "is_deleted": false,
+      "country": "Nigeria",
+      "currency": "NGN",
+      "type": "nuban",
+      "id": 1
+    }
+  ]
+}
+```
+
+| Parameter | Type | Description |
+| :--- | :--- | :--- |
+| `country` | `string` | Country name to filter banks (e.g., `nigeria`, `ghana`, `south africa`, `kenya`). |
+| `use_cursor` | `bool` | Set to `true` to enable cursor-based pagination. |
+| `perPage` | `int` | Number of bank records to retrieve per page (default: `50`). |
+
+---
+
+### Resolve Account Number
+
+Verify that an account number belongs to a valid bank account and retrieve the registered account name.
+
+**PHP Request**
+
+```php
+$response = $paystack->miscellaneous->bank->resolve([
+    'account_number' => '0123456789',
+    'bank_code' => '058',
+]);
+```
+
+**Sample Response**
+
+```json
+{
+  "status": true,
+  "message": "Account number resolved",
+  "data": {
+    "account_number": "0123456789",
+    "account_name": "JOHN DOE",
+    "bank_id": 9
+  }
+}
+```
+
+:::tip[Test Mode Behavior]
+In Paystack's test environment (`sk_test_...`), account resolution rate-limits live bank lookups. Use Paystack's test bank code `001` with any 10-digit account number during local development to avoid hitting daily test resolution caps.
+:::
+
+---
+
+### Validate Bank Account
+
+Confirm the authenticity of a customer's bank account against government-issued identity records (supported for South African accounts).
+
+**PHP Request**
+
+```php
+$response = $paystack->miscellaneous->bank->validate([
+    'account_name' => 'John Doe',
+    'account_number' => '0123456789',
+    'account_type' => 'personal',
+    'bank_code' => '632005',
+    'country_code' => 'ZA',
+    'document_type' => 'identityNumber',
+    'document_number' => '1234567890123',
+]);
+```
+
+**Sample Response**
+
+```json
+{
+  "status": true,
+  "message": "Personal Account Verification attempted",
+  "data": {
+    "verified": true,
+    "verificationMessage": "Account is verified"
+  }
+}
+```
+
+| Parameter | Type | Required | Description |
+| :--- | :--- | :--- | :--- |
+| `account_name` | `string` | Yes | Customer's full legal name on the account. |
+| `account_number` | `string` | Yes | Customer's bank account number. |
+| `account_type` | `string` | Yes | Account classification: `personal` or `business`. |
+| `bank_code` | `string` | Yes | Bank code from the supported banks list. |
+| `country_code` | `string` | Yes | Two-letter ISO country code (e.g., `ZA`). |
+| `document_type` | `string` | Yes | Identity document type: `identityNumber`, `passportNumber`, or `businessRegistrationNumber`. |
+| `document_number` | `string` | Yes | Customer's identity or registration number. |
+
+---
+
+## Card Resource - Paystack PHP SDK
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+## Card
+
+Inspect card metadata and issuer details via `$paystack->miscellaneous->card`.
+
+### Resolve Card BIN
+
+Retrieve card brand, card type (debit or credit), issuing bank, and country metadata from the first 6 digits (Bank Identification Number) of a payment card.
+
+**PHP Request**
+
+```php
+$response = $paystack->miscellaneous->card->resolveInfo('539983');
+```
+
+**Sample Response**
+
+```json
+{
+  "status": true,
+  "message": "Bin resolved",
+  "data": {
+    "bin": "539983",
+    "brand": "Mastercard",
+    "sub_brand": "",
+    "country_code": "NG",
+    "country_name": "Nigeria",
+    "card_type": "DEBIT",
+    "bank": "Guaranty Trust Bank",
+    "linked_bank_id": 9
+  }
+}
+```
+
+| Parameter | Type | Required | Description |
+| :--- | :--- | :--- | :--- |
+| `$bin` | `string` | Yes | The first 6 digits of the customer's card number. |
+
+:::info[PCI Compliance Note]
+Only pass the first 6 digits (BIN) of the card to `resolveInfo()`. Never collect, transmit, or log full Primary Account Numbers (PAN) or CVV codes on your backend server unless you maintain full PCI-DSS certification.
+:::
+
+---
+
+## Country Resource - Paystack PHP SDK
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+## Country
+
+Retrieve countries supported by Paystack along with their supported currencies, mobile money configurations, and integration features via `$paystack->miscellaneous->country`.
+
+### List Supported Countries
+
+Get a comprehensive list of all countries where Paystack operates or supports cross-border collections.
+
+**PHP Request**
+
+```php
+$response =$paystack->miscellaneous->country->list();
+```
+
+**Sample Response**
+
+```json
+{
+  "status": true,
+  "message": "Countries retrieved",
+  "data": [
+    {
+      "id": 1,
+      "name": "Nigeria",
+      "iso_code": "NGA",
+      "default_currency_code": "NGN",
+      
+      "currencies": [
+        "NGN",
+        "USD"
+      ],
+      "enabled_for_verification": true
+    }
+  ]
+}
+```
+
+:::tip[Cross-Border Integrations]
+Use the country and currency metadata returned by this endpoint to dynamically configure supported checkout currencies and bank resolution options when your platform operates across multiple African markets.
+:::
+
+---
+
+## Plan Resource - Paystack PHP SDK
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+## Plan
+
+Create and manage recurring billing plans via `$paystack->plan`.
+
+### Create a Plan
+
+Define a new billing plan that customers can be subscribed to at fixed intervals.
+
+**PHP Request**
+
+```php
+$response = $paystack->plan->create([
+    'name' => 'Monthly Pro Tier',
+    'interval' => 'monthly',
+    'amount' => 1000000, // NGN 10,000.00 in kobo
+]);
+```
+
+**Sample Response**
+
+```json
+{
+  "status": true,
+  "message": "Plan created",
+  "data": {
+    "name": "Monthly Pro Tier",
+    "amount": 1000000,
+    "interval": "monthly",
+    "integration": 463433,
+    "domain": "test",
+    "plan_code": "PLN_gx2wn530m0i3w3m",
+    "send_invoices": true,
+    "send_sms": true,
+    "currency": "NGN",
+    "id": 28
+  }
+}
+```
+
+| Parameter | Type | Required | Description |
+| :--- | :--- | :--- | :--- |
+| `name` | `string` | Yes | Name of the billing plan. |
+| `amount` | `int` | Yes | Amount to charge in the lowest currency denomination (e.g., kobo). |
+| `interval` | `string` | Yes | Billing frequency: `daily`, `weekly`, `monthly`, `quarterly`, `biannually`, or `annually`. |
+| `description` | `string` | No | Short summary of what the plan covers. |
+| `invoice_limit` | `int` | No | Number of invoices to raise during the subscription lifecycle. |
+
+---
+
+### List Plans
+
+Retrieve all billing plans created on your Paystack integration.
+
+```php
+$response = $paystack->plan->list([
+    'perPage' => 20,
+    'page' => 1,
+]);
+```
+
+---
+
+### Fetch a Plan
+
+Retrieve details of a specific plan using its `plan_code` or numeric `id`.
+
+```php
+$response = $paystack->plan->fetch('PLN_gx2wn530m0i3w3m');
+```
+
+---
+
+### Update a Plan
+
+Modify the details of an existing billing plan using its `plan_code` or numeric `id`.
+
+```php
+$response = $paystack->plan->update('PLN_gx2wn530m0i3w3m', [
+    'name' => 'Updated Pro Tier',
+    'amount' => 1200000,
+]);
+```
+
+:::info[Existing Plan Subscribers]
+Updating a plan's `amount` only applies to new subscriptions created after the update. Existing active subscriptions continue billing at their original subscribed rate.
+:::
+
+---
+
+## Subscription Resource - Paystack PHP SDK
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+## Subscription
+
+Manage customer subscriptions to your recurring billing plans via `$paystack->subscription`.
+
+### Create a Subscription
+
+Subscribe an existing customer to a billing plan.
+
+**PHP Request**
+
+```php
+$response = $paystack->subscription->create([
+    'customer' => 'CUS_xnxdt6s1zg1f4nx',
+    'plan' => 'PLN_gx2wn530m0i3w3m',
+]);
+```
+
+**Sample Response**
+
+```json
+{
+  "status": true,
+  "message": "Subscription successfully created",
+  "data": {
+    "customer": 1173,
+    "plan": 28,
+    "integration": 463433,
+    "domain": "test",
+    "start": 1459296064,
+    "status": "active",
+    "quantity": 1,
+    "amount": 1000000,
+    "subscription_code": "SUB_vsyqdmlzble3uii",
+    "email_token": "d7gofp6yppn3qz7",
+    "id": 9
+  }
+}
+```
+
+:::info[Authorization Requirement]
+The customer must already have a reusable card authorization on your integration before you can create a subscription directly. If multiple authorizations exist, you can pass an optional `authorization` code in the payload.
+:::
+
+---
+
+### List Subscriptions
+
+Retrieve a paginated list of subscriptions on your integration.
+
+```php
+$response = $paystack->subscription->list([
+    'perPage' => 20,
+    'page' => 1,
+]);
+```
+
+| Parameter | Type | Description |
+| :--- | :--- | :--- |
+| `perPage` | `int` | Number of records to retrieve per page (default: `50`). |
+| `page` | `int` | Page number to retrieve (default: `1`). |
+| `customer` | `int` | Filter subscriptions by a specific customer ID. |
+| `plan` | `int` | Filter subscriptions by a specific plan ID. |
+
+---
+
+### Fetch a Subscription
+
+Retrieve full details of a specific subscription using its `subscription_code` or numeric `id`.
+
+```php
+$response = $paystack->subscription->fetch('SUB_vsyqdmlzble3uii');
+```
+
+---
+
+### Enable or Disable a Subscription
+
+Activate a paused subscription or cancel an active one using its `subscription_code` and `email_token`.
+
+**Enable Subscription**
+
+```php
+$response = $paystack->subscription->enable([
+    'code' => 'SUB_vsyqdmlzble3uii',
+    'token' => 'd7gofp6yppn3qz7',
+]);
+```
+
+**Disable Subscription**
+
+```php
+$response = $paystack->subscription->disable([
+    'code' => 'SUB_vsyqdmlzble3uii',
+    'token' => 'd7gofp6yppn3qz7',
+]);
+```
+
+:::tip[Store the Email Token]
+Paystack returns `email_token` when you create or fetch a subscription. Save this token alongside `subscription_code` in your database so your backend can programmatically enable or cancel subscriptions without manual dashboard intervention.
+:::
+
+---
+
+## Transaction Resource - Paystack PHP SDK
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+## Transaction
+
+Accept payments, verify transaction statuses, and retrieve transaction history via `$paystack->transaction`.
+
+### Initialize a Transaction
+
+Start a payment session and retrieve an authorization URL to redirect your customer to Paystack's checkout.
+
+**PHP Request**
+
+```php
+$response =$paystack->transaction->initialize([
+    'email' => 'customer@example.com',
+    'amount' => 500000, // NGN 5,000.00 in kobo
+    'callback_url' => 'https://example.com/payment/callback',
+]);
+```
+
+**Sample Response**
+
+```json
+{
+  "status": true,
+  "message": "Authorization URL created",
+  "data": {
+    "authorization_url": "https://checkout.paystack.com/0peioxfhpn",
+    "access_code": "0peioxfhpn",
+    "reference": "7PVGX8MEk85tgeEpVDtD"
+  }
+}
+```
+
+:::info[Amount Calculation]
+The `amount` parameter must be passed in the **lowest currency denomination** (kobo for NGN, pesewas for GHS, cents for USD/ZAR). For example, pass `500000` for NGN 5,000.00.
+:::
+
+---
+
+### Verify a Transaction
+
+Confirm the final status of a transaction using its unique reference after the customer completes checkout or via webhook.
+
+**PHP Request**
+
+```php
+$response =$paystack->transaction->verify('7PVGX8MEk85tgeEpVDtD');
+```
+
+**Sample Response**
+
+```json
+{
+  "status": true,
+  "message": "Verification successful",
+  "data": {
+    "id": 2009945086,
+    "status": "success",
+    "reference": "7PVGX8MEk85tgeEpVDtD",
+    "amount": 500000,
+    "currency": "NGN",
+    "channel": "card"
+  }
+}
+```
+
+:::warning[Always Verify Server-Side]
+Never rely solely on frontend redirect callbacks to fulfill orders. Always call `$paystack->transaction->verify($reference)` on your server and check that `$response->data->status === 'success'` and the returned `amount` matches your expected order total.
+:::
+
+---
+
+### List Transactions
+
+Retrieve a paginated list of transactions carried out on your integration.
+
+```php
+$response =$paystack->transaction->list([
+    'perPage' => 20,
+    'page' => 1,
+]);
+```
+
+| Parameter | Type | Description |
+| :--- | :--- | :--- |
+| `perPage` | `int` | Number of records to retrieve per page (default: `50`). |
+| `page` | `int` | Page number to retrieve (default: `1`). |
+| `customer` | `int` | Filter transactions by a specific customer ID. |
+| `status` | `string` | Filter by transaction status (`failed`, `success`, `abandoned`). |
+
+---
+
+### Fetch a Single Transaction
+
+Get full details of a specific transaction using its numeric Paystack transaction ID.
+
+```php
+$response =$paystack->transaction->fetch(2009945086);
+```

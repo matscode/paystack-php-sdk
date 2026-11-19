@@ -1,0 +1,15 @@
+# Paystack PHP SDK
+
+> Clean, developer-friendly Paystack API wrapper for PHP
+
+This file contains links to documentation sections following the llmstxt.org standard.
+
+## Table of Contents
+
+- [Getting Started - Paystack PHP SDK](https://paystack-php.matsco.de/docs/intro): Install and initialize the Paystack PHP SDK in your project.
+- [Bank Resource - Paystack PHP SDK](https://paystack-php.matsco.de/docs/resources/miscellaneous/bank): List supported banks, resolve bank account numbers, and validate bank accounts using the Paystack PHP SDK.
+- [Card Resource - Paystack PHP SDK](https://paystack-php.matsco.de/docs/resources/miscellaneous/card): Resolve card BIN metadata including card brand, type, issuing bank, and country using the Paystack PHP SDK.
+- [Country Resource - Paystack PHP SDK](https://paystack-php.matsco.de/docs/resources/miscellaneous/country): Retrieve countries supported by Paystack and their respective currencies and configurations using the Paystack PHP SDK.
+- [Plan Resource - Paystack PHP SDK](https://paystack-php.matsco.de/docs/resources/plan): Create, list, fetch, and update recurring billing plans using the Paystack PHP SDK.
+- [Subscription Resource - Paystack PHP SDK](https://paystack-php.matsco.de/docs/resources/subscription): Create, list, fetch, enable, and disable customer subscriptions using the Paystack PHP SDK.
+- [Transaction Resource - Paystack PHP SDK](https://paystack-php.matsco.de/docs/resources/transaction): Initialize payments, verify transaction statuses, and retrieve transaction history using the Paystack PHP SDK.
