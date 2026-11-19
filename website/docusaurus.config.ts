@@ -10,7 +10,7 @@ const config: Config = {
     v4: true,
   },
 
-  url: "https://matscode.github.io",
+  url: "https://paystack-php.matsco.de",
   baseUrl: "/",
 
   organizationName: "matscode",
@@ -67,7 +67,8 @@ const config: Config = {
   ],
 
   plugins: [
-      "docusaurus-plugin-copy-page-button"
+    "docusaurus-plugin-copy-page-button",
+    "docusaurus-plugin-llms"
   ],
 
   themeConfig: {
